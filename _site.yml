@@ -1,0 +1,16 @@
+name: "LT_website"
+title: "Linear Threshold Models"
+description: |
+  Linear Threshold Models
+output_dir: "_site"
+navbar:
+  right:
+    - text: "Intro"
+      href: 01-intro.html
+    - text: "Methodology"
+      href: 02-methodology.html
+    - text: "Algorithm"
+      href: 03-algorithm.html
+    - text: "Application"
+      href: 04-application.html
+output: distill::distill_article

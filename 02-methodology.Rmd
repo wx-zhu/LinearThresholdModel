@@ -1,0 +1,49 @@
+---
+title: "Methodology"
+description: |
+  Some additional details about the website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Setting Up
+
+Linear Threshold Model (LTM) is one of the famous models simulating the spread of influence in networks. Continuing with the movie-inspired analogy, let's delve into the mechanics of how influence spreads through a network, denoted as $G$. In this directed network, each individual is represented as a node, categorized as either ***active*** (an adopter of the idea) or ***inactive***. Drawing from our motivation, the general assumption is that each node tends to become active.
+
+Now, let's consider the process in which nodes transition from being inactive to active. This transition occurs monotonically, meaning nodes can only shift from being inactive to active, but not the other way around. Thus, as time progresses, more and more of a node $v$'s neighbors become active. At some point, a neighbor node $w$ influences $v$ to become active, triggering further decisions among other nodes connected to $v$.
+
+
+# Linear Threshold (LT) Model
+
+In the Linear Threshold model, a node $v$ is influenced by each neighbor $w$ with a weight $b_{v,w}$ such that 
+$$\sum_{w \text{ neighbor of v}} b_{v,w} \le 1$$
+. Each node $v$ has a threshold $\theta_v$ which is randomly drawn from the uniform distribution over the interval $[0,1]$, representing the different levels of tendency for each node to adopt the idea from their neighbors. 
+
+With a given a random threshold and an initial set of active nodes $A_0$ (while all other nodes are inactive), the model operates in discrete steps. In step $t$, all nodes that are active in step $t-1$ remain active, and any inactive node $v$ in step $t-1$ becomes active if the weighted sum of its active neighbors is at least $\theta_v$:
+$$\sum_{w\text{ active neighbors of v}} b_{v,w}\ge \theta_v$$
+
+
+# Influence Maximization Problem
+
+The Influence Maximization Problem focuses on finding the best starting nodes to kick off the spread of influence in a network. It's all about figuring out: Where should we begin to maximize the nodes' impact?
+
+To crack this problem, we define the influence of a set of nodes $A$, denoted as $\sigma(A)$, as the expected number of active nodes at the end of the process, assuming $A$ is our initial set of active nodes $A_0$. So, the goal of the influence maximization problem is to identify the best initial set of nodes $A_0$, given a certain number $k$ where $k\in \bf{N}$, to maximize our influence.
+
+This problem is important because it helps us understand how information or behavior spreads in networks. By finding the most influential starting points, we can set off a chain reaction that gets more and more people on board with our idea or action. This matters a lot in areas like marketing, where we want to reach as many customers as possible, in disease control, where we aim to stop outbreaks before they spread, and in understanding social networks, where we want to see how trends catch on among groups of people.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
