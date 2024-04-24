@@ -90,27 +90,27 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>Linear Threshold Models</title>
 
-  <meta property="description" itemprop="description" content="Welcome to the website. I hope you enjoy it!"/>
+  <meta property="description" itemprop="description" content="By Wenxuan Zhu&#10;&#10;Welcome to the website. I hope you enjoy it!"/>
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Linear Threshold Models"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Welcome to the website. I hope you enjoy it!"/>
+  <meta property="og:description" content="By Wenxuan Zhu&#10;&#10;Welcome to the website. I hope you enjoy it!"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Linear Threshold Models"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Linear Threshold Models"/>
-  <meta property="twitter:description" content="Welcome to the website. I hope you enjoy it!"/>
+  <meta property="twitter:description" content="By Wenxuan Zhu&#10;&#10;Welcome to the website. I hope you enjoy it!"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","site"]}},"value":[{"type":"character","attributes":{},"value":["Linear Threshold Models"]},{"type":"character","attributes":{},"value":["Welcome to the website. I hope you enjoy it!\n"]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","site"]}},"value":[{"type":"character","attributes":{},"value":["Linear Threshold Models"]},{"type":"character","attributes":{},"value":["By Wenxuan Zhu\n\nWelcome to the website. I hope you enjoy it!\n"]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2094,7 +2094,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Linear Threshold Models","description":"Welcome to the website. I hope you enjoy it!","authors":[]}
+{"title":"Linear Threshold Models","description":"By Wenxuan Zhu\n\nWelcome to the website. I hope you enjoy it!","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2105,8 +2105,23 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a href="index.html" class="title">Linear Threshold Models</a>
 </div>
 <div class="nav-right">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
+<a href="index.html">Intro</a>
+<a href="02-methodology.html">Methodology</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Algorithm
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="03-results.html">Results</a>
+<a href="03-algorithm.html">R code</a>
+</div>
+</div>
+<a href="04-application.html">Application</a>
+<a href="https://github.com/wx-zhu/LinearThreshold_project">
+<i class="fab fa-github" aria-hidden="true"></i>
+</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -2119,11 +2134,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Linear Threshold Models</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Welcome to the website. I hope you enjoy it!</p></p>
+<p><p>By Wenxuan Zhu</p>
+<p>Welcome to the website. I hope you enjoy it!</p></p>
 </div>
 
 
 <div class="d-article">
+<h1 id="intro-to-graphs">Intro to Graphs</h1>
+<p>Graphs (networks) are visual representations of connections between things. They consist of dots (nodes) connected by lines (edges). Graphs help us understand how things are related and how information flows in systems like social networks, transportation routes, and more.</p>
+<h1 id="spread-of-influence">Spread of Influence</h1>
+<p>Imagine you’re planning a movie night with your friends. You suggest watching a new superhero movie, but not everyone is immediately on board. However, you know that once a few friends agree to watch it, they’ll start convincing others to join in.</p>
+<p>In this scenario, your social circle forms a network where each person’s decision to watch the movie is influenced by their connections. When one friend agrees to watch, they start spreading the excitement to other connected peers in the network. Soon enough, more and more friends agree with the superhero movie bandwagon.</p>
+<p>This simple example illustrates how influence can spread through a network, starting with just a few initial adopters and gradually reaching a larger portion of the group as the excitement/agreement spreads from friend to friend.</p>
+<h2 class="appendix" id="acknowledgement">Acknowledgement</h2>
+<p>A huge thank you to my professor <a href="https://mathbeveridge.github.io/">Andrew Beveridge</a> for delivering this amazing Network Science capstone class. Your expertise and passion have truly enriched our learning experience. :)</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

@@ -1,0 +1,7 @@
+---
+title: "Results"
+description: |
+  In this section, we are going to explore the implementation of linear threshold model in R studio. 
+code_folding: true
+---
+

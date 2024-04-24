@@ -11,3 +11,6 @@ Encoding: UTF-8
 
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
+
+BuildType: Website
+WebsitePath: /Users/zhuwenxuan/Desktop/MATH 479/LinearThreshold_project

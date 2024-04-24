@@ -12,7 +12,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Learn more about creating websites with Distill at:
 # https://rstudio.github.io/distill/website.html
-
 ```
 
 # Intro to Graphs
@@ -28,7 +27,7 @@ In this scenario, your social circle forms a network where each person's decisio
 This simple example illustrates how influence can spread through a network, starting with just a few initial adopters and gradually reaching a larger portion of the group as the excitement/agreement spreads from friend to friend.
 
 
-## Acknowledgement
+## Acknowledgement{.appendix}
 
 A huge thank you to my professor [Andrew Beveridge](https://mathbeveridge.github.io/) for delivering this amazing Network Science capstone class. Your expertise and passion have truly enriched our learning experience. :) 
 
