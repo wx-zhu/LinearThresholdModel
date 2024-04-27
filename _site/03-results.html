@@ -90,27 +90,27 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>Linear Threshold Models: Results</title>
 
-  <meta property="description" itemprop="description" content="In this section, we are going to explore the implementation of linear threshold model in R studio."/>
+  <meta property="description" itemprop="description" content="I will cover several functions of the LTM and showcase some shiny apps for simulations! Click *Show Code* for the implementation. :)"/>
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Linear Threshold Models: Results"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="In this section, we are going to explore the implementation of linear threshold model in R studio."/>
+  <meta property="og:description" content="I will cover several functions of the LTM and showcase some shiny apps for simulations! Click *Show Code* for the implementation. :)"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Linear Threshold Models"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Linear Threshold Models: Results"/>
-  <meta property="twitter:description" content="In this section, we are going to explore the implementation of linear threshold model in R studio."/>
+  <meta property="twitter:description" content="I will cover several functions of the LTM and showcase some shiny apps for simulations! Click *Show Code* for the implementation. :)"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","code_folding"]}},"value":[{"type":"character","attributes":{},"value":["Results"]},{"type":"character","attributes":{},"value":["In this section, we are going to explore the implementation of linear threshold model in R studio. \n"]},{"type":"logical","attributes":{},"value":[true]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","code_folding"]}},"value":[{"type":"character","attributes":{},"value":["Results"]},{"type":"character","attributes":{},"value":["I will cover several functions of the LTM and showcase some shiny apps for simulations! Click *Show Code* for the implementation. :)\n"]},{"type":"logical","attributes":{},"value":[true]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2094,7 +2094,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Results","description":"In this section, we are going to explore the implementation of linear threshold model in R studio.","authors":[]}
+{"title":"Results","description":"I will cover several functions of the LTM and showcase some shiny apps for simulations! Click *Show Code* for the implementation. :)","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2134,11 +2134,308 @@ Algorithm
 <h1>Results</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>In this section, we are going to explore the implementation of linear threshold model in R studio.</p></p>
+<p><p>I will cover several functions of the LTM and showcase some shiny apps for simulations! Click <em>Show Code</em> for the implementation. :)</p></p>
 </div>
 
 
 <div class="d-article">
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h1 id="liner-threshold-model">Liner Threshold Model</h1>
+<p>In this section, I’ve developed key functions to implement the Linear Threshold Model.</p>
+<p>Firstly, I created two methods for assigning edge weights: uniform weights and random weights. Recall from the methodology, it’s crucial that the sum of weights from neighboring nodes doesn’t exceed 1, a requirement of the Linear Threshold Model (LTM):
+<span class="math display">\[
+\sum_{w \text{ neighbor of } v} b_{v,w} \leq 1
+\]</span>
+This ensures that the cumulative influence exerted by neighboring nodes remains within manageable bounds, facilitating robust analyses within the LTM framework.</p>
+<p>For uniform weights (<code>uniformWeights</code>), each incoming edge to node <span class="math inline">\(v\)</span> in graph <span class="math inline">\(G\)</span> with degree <span class="math inline">\(\text{deg}_v\)</span> is assigned an equal weight of <span class="math inline">\(\frac{1}{\text{deg}_v}\)</span>. With random weights (<code>randomWeights</code>), each edge receives a random weight. After assignment, weights are normalized for all incoming edges of each node to ensure their sum equals 1.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Function to calculate uniform edge weights</span></span>
+<span><span class='co'>## Every incoming edge of v with degree dv has weight 1/dv.</span></span>
+<span><span class='va'>uniformWeights</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='co'># Initialize empty list to store edge weights</span></span>
+<span>  <span class='va'>Ew</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span>  <span class='co'># Loop over edges in the graph</span></span>
+<span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>e</span> <span class='kw'>in</span> <span class='fu'>E</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='co'># Get the target node of the edge</span></span>
+<span>    <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'>ends</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span>    <span class='co'># Calculate the degree of the target node</span></span>
+<span>    <span class='va'>dv</span> <span class='op'>&lt;-</span> <span class='fu'>degree</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>v</span>, mode <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span></span>
+<span>    <span class='co'># Assign weight to the edge</span></span>
+<span>    <span class='va'>Ew</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>1</span> <span class='op'>/</span> <span class='va'>dv</span></span>
+<span>  <span class='op'>}</span></span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>Ew</span><span class='op'>)</span></span>
+<span><span class='op'>}</span></span>
+<span></span>
+<span><span class='co'># Function to calculate random edge weights </span></span>
+<span><span class='co'>## Every edge has random weight. After weights assigned, we normalize weights of all incoming edges for each </span></span>
+<span><span class='co'># node so that they sum to 1.</span></span>
+<span><span class='va'>randomWeights</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>Ew</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># Initialize empty list to store edge weights</span></span>
+<span>  <span class='co'># Assign random weights to edges</span></span>
+<span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>v</span> <span class='kw'>in</span> <span class='fu'>V</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='va'>in_edges</span> <span class='op'>&lt;-</span> <span class='fu'>incident</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>v</span>, mode <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span>  <span class='co'># Get incoming edges for the current node</span></span>
+<span>    <span class='va'>ew</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>in_edges</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Generate random weights for incoming edges</span></span>
+<span>    <span class='va'>total_weight</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>ew</span><span class='op'>)</span>  <span class='co'># Calculate the total weight of incoming edges</span></span>
+<span>    <span class='co'># Normalize weights so that they sum to 1 for each node</span></span>
+<span>    <span class='va'>ew</span> <span class='op'>&lt;-</span> <span class='va'>ew</span> <span class='op'>/</span> <span class='va'>total_weight</span></span>
+<span>    <span class='co'># Store the weights for the incoming edges</span></span>
+<span>    <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='va'>in_edges</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>      <span class='va'>Ew</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>in_edges</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>ew</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span></span>
+<span>    <span class='op'>}</span></span>
+<span>  <span class='op'>}</span></span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>Ew</span><span class='op'>)</span></span>
+<span><span class='op'>}</span></span></code></pre>
+</div>
+</details>
+</div>
+<p><br />
+With the network, edge weight setup, and the set of initial active nodes <span class="math inline">\(A_0\)</span> (referred to as <span class="math inline">\(S\)</span> in the function), we’re ready to execute a linear threshold model!</p>
+<p>Focusing on a <strong>single</strong> iteration, the <code>runLT</code> function assigns a threshold to each node from a uniform distribution. It then calculates the total weight of the activated in-neighbors, updates it, and compares the total weights with the nodes’ thresholds. If the total weights exceed the threshold, the node is activated. The final output is a list of total active nodes in the network.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Function to run linear threshold model</span></span>
+<span><span class='va'>runLT</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>S</span>, <span class='va'>Ew</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='cn'>T</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>S</span><span class='op'>)</span>  <span class='co'># Targeted set with unique nodes</span></span>
+<span>  <span class='va'>lv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'>V</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>u</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Threshold for nodes</span></span>
+<span>  <span class='va'>W</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fu'>vcount</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Weighted number of activated in-neighbors</span></span>
+<span>  <span class='va'>Sj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>S</span><span class='op'>)</span></span>
+<span>  </span>
+<span>  <span class='kw'>while</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>Sj</span><span class='op'>)</span> <span class='op'>&gt;</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='cn'>T</span><span class='op'>)</span> <span class='op'>&gt;=</span> <span class='fu'>vcount</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>      <span class='kw'>break</span>  <span class='co'># Break if the number of active nodes exceeds or equals the total number of nodes in G</span></span>
+<span>    <span class='op'>}</span></span>
+<span>    <span class='va'>Snew</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span>    <span class='kw'>for</span> <span class='op'>(</span><span class='va'>u</span> <span class='kw'>in</span> <span class='va'>Sj</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>      <span class='va'>neighbors</span> <span class='op'>&lt;-</span> <span class='fu'>neighbors</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>u</span>, mode <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span></span>
+<span>      <span class='kw'>for</span> <span class='op'>(</span><span class='va'>v</span> <span class='kw'>in</span> <span class='va'>neighbors</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>        <span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'>get.edge.ids</span><span class='op'>(</span><span class='va'>G</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>v</span>, <span class='va'>u</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Define 'e' as the edge index</span></span>
+<span>        <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>v</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>          <span class='co'># Calculate the total weight of the activated in-neighbors</span></span>
+<span>          <span class='va'>total_weight</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>Ew</span><span class='op'>[[</span><span class='va'>e</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span></span>
+<span>          </span>
+<span>          <span class='co'># Update the weighted number of activated in-neighbors</span></span>
+<span>          <span class='va'>W</span><span class='op'>[</span><span class='va'>v</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>W</span><span class='op'>[</span><span class='va'>v</span><span class='op'>]</span> <span class='op'>+</span> <span class='va'>total_weight</span></span>
+<span>          </span>
+<span>          <span class='co'># Check if the threshold is exceeded</span></span>
+<span>          <span class='kw'>if</span> <span class='op'>(</span><span class='va'>W</span><span class='op'>[</span><span class='va'>v</span><span class='op'>]</span> <span class='op'>&gt;=</span> <span class='va'>lv</span><span class='op'>[</span><span class='va'>v</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>            <span class='va'>Snew</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>Snew</span>, <span class='va'>v</span><span class='op'>)</span></span>
+<span>            <span class='cn'>T</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>T</span>, <span class='va'>v</span><span class='op'>)</span></span>
+<span>          <span class='op'>}</span></span>
+<span>        <span class='op'>}</span></span>
+<span>      <span class='op'>}</span></span>
+<span>    <span class='op'>}</span></span>
+<span>    <span class='va'>Sj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>Snew</span><span class='op'>)</span>  <span class='co'># Ensure unique nodes in the new set</span></span>
+<span>  <span class='op'>}</span></span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='cn'>T</span><span class='op'>)</span>  <span class='co'># Return all activated nodes</span></span>
+<span><span class='op'>}</span></span></code></pre>
+</div>
+</details>
+</div>
+<p><br />
+Now, let’s extend to <strong>multiple</strong> iterations!</p>
+<p>The <code>activeNodes</code> function is the main function for calculating the total number of active nodes at each iteration. It iterates through the process and prints out the names of the active nodes for each iteration in the console. The function outputs a two-column table displaying the total number of active nodes in each iteration.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Function to calculate the total number of active nodes at each iteration</span></span>
+<span><span class='va'>activeNodes</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>S</span>, <span class='va'>Ew</span>, <span class='va'>iterations</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>active_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>iteration <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>integer</a></span><span class='op'>(</span><span class='op'>)</span>, </span>
+<span>                          total_active_nodes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>integer</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  <span class='va'>total_active_nodes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='va'>iterations</span><span class='op'>)</span>  <span class='co'># Initialize empty vector to store total active nodes</span></span>
+<span>  </span>
+<span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>iterations</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='cn'>T</span> <span class='op'>&lt;-</span> <span class='fu'>runLT</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>S</span>, <span class='va'>Ew</span><span class='op'>)</span></span>
+<span>    <span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span><span class='op'>(</span><span class='st'>"--"</span>, <span class='va'>i</span>,<span class='st'>"T:  "</span>, <span class='cn'>T</span>, <span class='st'>"\n"</span><span class='op'>)</span> <span class='co'># print active node names for this iteration in the console</span></span>
+<span>    <span class='va'>total_active</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Calculate the total active nodes in this iteration</span></span>
+<span>    <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>total_active</span>  <span class='co'># Update total active nodes for current iteration</span></span>
+<span>    </span>
+<span>    <span class='co'># Limit total active nodes to the number of nodes in the graph</span></span>
+<span>    <span class='kw'>if</span> <span class='op'>(</span><span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&gt;=</span> <span class='fu'>vcount</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>      <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'>vcount</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>  </span>
+<span>    <span class='op'>}</span></span>
+<span>    </span>
+<span>    <span class='co'># Update data frame with current iteration's total active nodes</span></span>
+<span>    <span class='va'>active_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>active_df</span>, <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>iteration <span class='op'>=</span> <span class='va'>i</span>, </span>
+<span>                                             total_active_nodes <span class='op'>=</span> <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>    </span>
+<span>    <span class='co'># Update seed set S for the next iteration</span></span>
+<span>    <span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>S</span>, <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  <span class='op'>}</span></span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>active_df</span><span class='op'>)</span></span>
+<span><span class='op'>}</span></span></code></pre>
+</div>
+</details>
+</div>
+<p><br />
+</p>
+<h1 id="random-graph-setup">Random Graph Setup</h1>
+<p>What are some simple network?</p>
+<p>I employed the <a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model">Erdős–Rényi model</a> <span class="math inline">\(G(n, p)\)</span> and the <a href="https://en.wikipedia.org/wiki/Preferential_attachment">preferential attachment model</a>. These models offer a straightforward way to simulate network structures, allowing for comparisons between random graphs and those with power law distributions.</p>
+<h3 id="erdős-rényi-model">Erdős-Rényi model</h3>
+<p>Here’s an example of the Erdős-Rényi model with 50 nodes. Each edge has a 5% probability of being included. Using uniform edge weights, the edges vary in width and color: thinner and blue for smaller weights, and wider and red for larger weights.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>## Erdős–Rényi model</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span></span>
+<span><span class='co'># Create a random graph with 50 nodes and edge weights satisfying the constraint</span></span>
+<span><span class='va'>random_graph_50</span> <span class='op'>&lt;-</span> <span class='fu'>erdos.renyi.game</span><span class='op'>(</span><span class='fl'>50</span>, p <span class='op'>=</span> <span class='fl'>0.05</span>, directed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='co'># random graph set up</span></span>
+<span></span>
+<span><span class='co'># Equal edge weight for node v -&gt; Calculate uniform edge weights</span></span>
+<span><span class='va'>Ew_uniform</span> <span class='op'>&lt;-</span> <span class='fu'>uniformWeights</span><span class='op'>(</span><span class='va'>random_graph_50</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Scale edge width based on the weights in Ew_uniform</span></span>
+<span><span class='va'>edge_width</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'>E</span><span class='op'>(</span><span class='va'>random_graph_50</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'>ends</span><span class='op'>(</span><span class='va'>random_graph_50</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span>  <span class='va'>Ew_uniform</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span></span>
+<span><span class='op'>}</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Map edge_width to color_palette</span></span>
+<span><span class='va'>color_palette</span> <span class='op'>&lt;-</span> <span class='fu'>wes_palette</span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>5</span>, name<span class='op'>=</span><span class='st'>"Zissou1"</span><span class='op'>)</span></span>
+<span><span class='va'>edge_color</span> <span class='op'>&lt;-</span> <span class='va'>color_palette</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>edge_width</span>, breaks <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>]</span></span>
+<span></span>
+<span><span class='co'># Plot the graph with gradient edge color</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mar<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>.1</span><span class='op'>)</span></span>
+<span><span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'>plot.igraph</span><span class='op'>(</span><span class='va'>random_graph_50</span>, </span>
+<span>            edge.width <span class='op'>=</span> <span class='va'>edge_width</span>, </span>
+<span>            edge.color <span class='op'>=</span> <span class='va'>edge_color</span>,</span>
+<span>            edge.arrow.size <span class='op'>=</span> <span class='fl'>0.4</span>,</span>
+<span>            layout <span class='op'>=</span> <span class='va'>layout.circle</span>,</span>
+<span>            vertex.label <span class='op'>=</span> <span class='cn'>NA</span>,</span>
+<span>            vertex.size <span class='op'>=</span> <span class='fl'>10</span>, </span>
+<span>            vertex.color <span class='op'>=</span>  <span class='st'>"#A9AABC"</span><span class='op'>)</span></span></code></pre>
+</div>
+</details>
+<p><img src="03-results_files/figure-html5/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+<h3 id="preferential-attachment-model">Preferential attachment model</h3>
+<p>Here’s an example of the Preferential attachment model with 50 nodes. The graph follows a power-law distribution with power equal to <span class="math inline">\(1\)</span>. Each nodes has a <span class="math inline">\(5\)</span> incoming edges. Similarly, using uniform edge weights, the edges vary in width and color: thinner and blue for smaller weights, and wider and red for larger weights.</p>
+<blockquote>
+<p><strong>What is power law?</strong> In network science, it describes the distribution of node degrees, where a few nodes have many connections while most nodes have few connections.</p>
+</blockquote>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>## Preferential attachment model</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span></span>
+<span><span class='co'># Create a random graph with 50 nodes and edge weights satisfying the constraint</span></span>
+<span><span class='va'>random_graph_50</span> <span class='op'>&lt;-</span> <span class='fu'>sample_pa</span><span class='op'>(</span><span class='fl'>50</span>, power <span class='op'>=</span> <span class='fl'>1</span>, m <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='co'># random graph set up</span></span>
+<span></span>
+<span><span class='co'># Equal edge weight for node v -&gt; Calculate uniform edge weights</span></span>
+<span><span class='va'>Ew_uniform</span> <span class='op'>&lt;-</span> <span class='fu'>uniformWeights</span><span class='op'>(</span><span class='va'>random_graph_50</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Scale edge width based on the weights in Ew_uniform</span></span>
+<span><span class='va'>edge_width</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'>E</span><span class='op'>(</span><span class='va'>random_graph_50</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'>ends</span><span class='op'>(</span><span class='va'>random_graph_50</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span>  <span class='va'>Ew_uniform</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span></span>
+<span><span class='op'>}</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Map edge_width to color_palette</span></span>
+<span><span class='va'>color_palette</span> <span class='op'>&lt;-</span> <span class='fu'>wes_palette</span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>5</span>, name<span class='op'>=</span><span class='st'>"Zissou1"</span><span class='op'>)</span></span>
+<span><span class='va'>edge_color</span> <span class='op'>&lt;-</span> <span class='va'>color_palette</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>edge_width</span>, breaks <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>]</span></span>
+<span></span>
+<span><span class='co'># Plot the graph with gradient edge color</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mar<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>.1</span><span class='op'>)</span></span>
+<span><span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'>plot.igraph</span><span class='op'>(</span><span class='va'>random_graph_50</span>, </span>
+<span>            edge.width <span class='op'>=</span> <span class='va'>edge_width</span>, </span>
+<span>            edge.color <span class='op'>=</span> <span class='va'>edge_color</span>,</span>
+<span>            edge.arrow.size <span class='op'>=</span> <span class='fl'>0.4</span>,</span>
+<span>            layout <span class='op'>=</span> <span class='va'>layout.circle</span>,</span>
+<span>            vertex.label <span class='op'>=</span> <span class='cn'>NA</span>,</span>
+<span>            vertex.size <span class='op'>=</span> <span class='fl'>10</span>, </span>
+<span>            vertex.color <span class='op'>=</span>  <span class='st'>"#A9AABC"</span><span class='op'>)</span></span></code></pre>
+</div>
+</details>
+<p><img src="03-results_files/figure-html5/unnamed-chunk-6-1.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+<p><br />
+</p>
+<h2 id="example-usage-for-ltm">Example Usage for LTM</h2>
+<p>Experiment with various simulation setup! The plot and table depict the total active nodes for each iteration in five random graphs labeled as <code>df1</code> to <code>df5</code>. If the plot displays a horizontal line, it suggests no increase in active nodes, which can occur. Attempt running the simulation multiple times to observe changes.</p>
+<iframe src="https://wx-zhu.shinyapps.io/LTM_simulation/" class="l-body-outset shaded" height="1000px">
+</iframe>
+<h1 id="greedy-algorithm-for-ltm">Greedy Algorithm for LTM</h1>
+<p>I’ve developed two functions to implement the hill climbing algorithm on LTM.</p>
+<p>The <code>avgLT</code> function calculates the average size of activated nodes in the current step. On the other hand, the <code>Greedy_LTM</code> function is the primary tool for the greedy hill climbing approach. It requires input parameters including the graph, edge weights, the initial seed set size (denoted as <span class="math inline">\(k\)</span>), and the number of iterations. For instance, if the number of iterations is 10, it selects the node with the maximum influence in the current iteration and adds it to the seed set. The output is <span class="math inline">\(k\)</span> initial active nodes that maximize the local influence.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Function to calculate average size of activated nodes</span></span>
+<span><span class='va'>avgLT</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>S</span>, <span class='va'>Ew</span>, <span class='va'>iterations</span> <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>avgSize</span> <span class='op'>&lt;-</span> <span class='fl'>0</span></span>
+<span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>iterations</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='cn'>T</span> <span class='op'>&lt;-</span> <span class='fu'>runLT</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>S</span>, <span class='va'>Ew</span><span class='op'>)</span></span>
+<span>    <span class='va'>avgSize</span> <span class='op'>&lt;-</span> <span class='va'>avgSize</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='cn'>T</span><span class='op'>)</span> <span class='op'>/</span> <span class='va'>iterations</span></span>
+<span>  <span class='op'>}</span></span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>avgSize</span><span class='op'>)</span></span>
+<span><span class='op'>}</span></span>
+<span></span>
+<span></span>
+<span><span class='co'># Greedy_LTM function to select k initial active nodes that maximize the local influence</span></span>
+<span><span class='va'>Greedy_LTM</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>Ew</span>, <span class='va'>k</span>, <span class='va'>iterations</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>start</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># Record the start time</span></span>
+<span>  <span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># Initialize the seed set</span></span>
+<span>  </span>
+<span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>k</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='va'>inf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>nodes <span class='op'>=</span> <span class='fu'>V</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>, influence <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>  <span class='co'># Initialize the influence table</span></span>
+<span>    </span>
+<span>    <span class='co'># Calculate the influence for nodes not in S</span></span>
+<span>    <span class='kw'>for</span> <span class='op'>(</span><span class='va'>v</span> <span class='kw'>in</span> <span class='fu'>V</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>      <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>v</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>S</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>        <span class='va'>inf</span><span class='op'>$</span><span class='va'>influence</span><span class='op'>[</span><span class='va'>v</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'>avgLT</span><span class='op'>(</span><span class='va'>G</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>S</span>, <span class='va'>v</span><span class='op'>)</span>, <span class='va'>Ew</span>, iterations <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span>      <span class='op'>}</span></span>
+<span>    <span class='op'>}</span></span>
+<span>    </span>
+<span>    <span class='co'># Exclude nodes already in S</span></span>
+<span>    <span class='va'>inf_excluded</span> <span class='op'>&lt;-</span> <span class='va'>inf</span><span class='op'>[</span><span class='op'>!</span><span class='va'>inf</span><span class='op'>$</span><span class='va'>nodes</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>S</span>, <span class='op'>]</span></span>
+<span>    </span>
+<span>    <span class='co'># Select the node with maximum influence and add it to the seed set</span></span>
+<span>    <span class='va'>u</span> <span class='op'>&lt;-</span> <span class='va'>inf_excluded</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/which.min.html'>which.max</a></span><span class='op'>(</span><span class='va'>inf_excluded</span><span class='op'>$</span><span class='va'>influence</span><span class='op'>)</span>, <span class='op'>]</span><span class='op'>$</span><span class='va'>nodes</span></span>
+<span>    <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='st'>"Selected node:"</span>, <span class='va'>u</span>, <span class='st'>"with influence:"</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>inf_excluded</span><span class='op'>$</span><span class='va'>influence</span><span class='op'>)</span>, <span class='st'>"\n"</span><span class='op'>)</span></span>
+<span>  </span>
+<span>    <span class='co'># Convert node name to numeric</span></span>
+<span>    <span class='va'>u</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>u</span><span class='op'>)</span></span>
+<span>    </span>
+<span>    <span class='co'># Add selected node to the seed set</span></span>
+<span>    <span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>S</span>, <span class='va'>u</span><span class='op'>)</span></span>
+<span>  <span class='op'>}</span></span>
+<span>  </span>
+<span>  <span class='va'>end</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># Record the end time</span></span>
+<span>  <span class='co'># Print the total time taken</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"Total time:"</span>, <span class='va'>end</span> <span class='op'>-</span> <span class='va'>start</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  </span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>S</span><span class='op'>)</span>  <span class='co'># Return the seed set</span></span>
+<span><span class='op'>}</span></span></code></pre>
+</div>
+</details>
+</div>
+<h2 id="example-greedy-algorithm-of-influence-max-problem-on-ltm">Example: Greedy Algorithm of Influence Max Problem on LTM</h2>
+<p>The plot and table depict the total active nodes for each iteration in 3 random graphs labeled as <code>df1</code> to <code>df3</code> and one graphs with selected initial active nodes denoted as <code>greedy</code>. If the plot displays a horizontal line, it suggests no increase in active nodes, which can occur. Attempt running the simulation multiple times to observe changes.</p>
+<iframe src="https://wx-zhu.shinyapps.io/LTM_greedy/" class="l-body-outset shaded" height="1000px">
+</iframe>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
@@ -2147,6 +2444,15 @@ Algorithm
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

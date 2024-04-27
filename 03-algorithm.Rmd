@@ -11,15 +11,15 @@ knitr::opts_chunk$set(
   collapse = TRUE, 
   warning = FALSE,
   message = FALSE,
-  fig.height = 4.75, 
-  fig.width = 6.25,
+  fig.height = 4, 
+  fig.width = 6,
   fig.align = 'center')
 ```
 
-# Random Graph Set up 
-
+# Load Packages
 ```{r}
-library(tidyverse)
+# Use `install.packages("_package name_")` if you haven't install them
+library(tidyverse) 
 library(ggpubr)
 library(igraph)
 library(poweRlaw)
@@ -28,61 +28,13 @@ library(data.table)
 library(graphics)
 library(knitr)
 library(rmarkdown)
+library(wesanderson) # color
 
 theme_set(theme_bw())
 ```
 
-```{r}
-# Function to create a random graph with edge weights satisfying the constraint
-create_weighted_random_graph <- function(num_nodes) {
-  # Generate a random graph with 'num_nodes' nodes
-  random_graph <- erdos.renyi.game(num_nodes, p = 0.1, directed = TRUE)
-  
-  # Initialize the graph with zero edge weights
-  Ew <- matrix(0, nrow = num_nodes, ncol = num_nodes)
-  
-  # Loop through each node
-  for (v in 1:num_nodes) {
-    neighbors <- neighbors(random_graph, v, mode = "in")
-    
-    # Assign edge weights inversely proportional to the number of edges connected to node 'v'
-    num_neighbors <- length(neighbors)
-    if (num_neighbors > 0) {
-      weight <- 1 / num_neighbors
-      for (w in neighbors) {
-        Ew[w, v] <- weight
-      }
-    } else {
-      # Set edge weight to 0 if the number of neighbors is 0
-      # Loop through all nodes to ensure zero weights are assigned
-      for (w in 1:num_nodes) {
-        Ew[w, v] <- 0
-      }
-    }
-  }
-  
-  
-  # Create a weighted graph from the adjacency matrix with edge weights
-  weighted_random_graph <- graph_from_adjacency_matrix(Ew, mode = "directed", weighted = TRUE)
-  
-  return(weighted_random_graph)
-}
-
-# Create a random graph with 50 nodes and edge weights satisfying the constraint
-random_graph_50 <- create_weighted_random_graph(50)
-
-# Plot the random graph
-par(mar=c(0,0,0,0)+.1)
-plot.igraph(random_graph_50, 
-     edge.width = E(random_graph_50)$weight, 
-     edge.arrow.size=0.4,
-     layout = layout.circle,
-     vertex.size=13, 
-     vertex.color = "#A9AABC")
-```
-
 # Liner Threshold Model
-```{r}
+```{r LTM functions}
 # Function to calculate uniform edge weights
 ## Every incoming edge of v with degree dv has weight 1/dv.
 uniformWeights <- function(G) {
@@ -165,7 +117,7 @@ activeNodes <- function(G, S, Ew, iterations) {
   
   for (i in 1:iterations) {
     T <- runLT(G, S, Ew)
-    message("--", i,"T:  ", T, "\n")
+    cat("--", i,"T:  ", T, "\n")
     total_active <- length(unique(T))  # Calculate the total active nodes in this iteration
     total_active_nodes[i] <- total_active  # Update total active nodes for current iteration
     
@@ -185,10 +137,82 @@ activeNodes <- function(G, S, Ew, iterations) {
 }
 ```
 
-# Example Usage for LTM
-```{r LTM eqal Ew}
+# Random Graph Set up 
+
+### Erdős–Rényi model
+```{r, fig.height=4, fig.width=4}
+## Erdős–Rényi model
 set.seed(123)
-random_graph_50 <- erdos.renyi.game(50, p = 0.1, directed = TRUE) # random graph set up
+# Create a random graph with 50 nodes and edge weights satisfying the constraint
+random_graph_50 <- erdos.renyi.game(50, p = 0.05, directed = TRUE) # random graph set up
+
+# Equal edge weight for node v -> Calculate uniform edge weights
+Ew_uniform <- uniformWeights(random_graph_50)
+
+# Scale edge width based on the weights in Ew_uniform
+edge_width <- sapply(E(random_graph_50), function(e) {
+  v <- ends(random_graph_50, e)[2]
+  Ew_uniform[[as.character(e)]]
+})
+
+# Map edge_width to color_palette
+color_palette <- wes_palette(n=5, name="Zissou1")
+edge_color <- color_palette[cut(edge_width, breaks = 5)]
+
+# Plot the graph with gradient edge color
+par(mar=c(0,0,0,0)+.1)
+p1 <- plot.igraph(random_graph_50, 
+            edge.width = edge_width, 
+            edge.color = edge_color,
+            edge.arrow.size = 0.4,
+            layout = layout.circle,
+            vertex.label = NA,
+            vertex.size = 10, 
+            vertex.color =  "#A9AABC")
+```
+
+### Preferential attachment model
+```{r, fig.height=4, fig.width=4}
+## Preferential attachment model
+set.seed(123)
+# Create a random graph with 50 nodes and edge weights satisfying the constraint
+random_graph_50 <- sample_pa(50, power = 1, m = 5) # random graph set up
+
+# Equal edge weight for node v -> Calculate uniform edge weights
+Ew_uniform <- uniformWeights(random_graph_50)
+
+# Scale edge width based on the weights in Ew_uniform
+edge_width <- sapply(E(random_graph_50), function(e) {
+  v <- ends(random_graph_50, e)[2]
+  Ew_uniform[[as.character(e)]]
+})
+
+# Map edge_width to color_palette
+color_palette <- wes_palette(n=5, name="Zissou1")
+edge_color <- color_palette[cut(edge_width, breaks = 5)]
+
+# Plot the graph with gradient edge color
+par(mar=c(0,0,0,0)+.1)
+p1 <- plot.igraph(random_graph_50, 
+            edge.width = edge_width, 
+            edge.color = edge_color,
+            edge.arrow.size = 0.4,
+            layout = layout.circle,
+            vertex.label = NA,
+            vertex.size = 10, 
+            vertex.color =  "#A9AABC")
+```
+
+
+# Example Usage for LTM
+
+- Equal edge weight for node v: 
+
+```{r LTM equal Ew}
+set.seed(123)
+random_graph_50 <- erdos.renyi.game(50, p = 0.05, directed = TRUE) # random graph set up
+## Or on preferential attachment model
+# random_graph_50 <- sample_pa(50, p = 0.1, directed = TRUE) # random graph set up
 S <- sample(1:vcount(random_graph_50), 3)  # Initial seed set of nodes
 
 # Equal edge weight for node v -> Calculate uniform edge weights
@@ -201,27 +225,47 @@ edge_width <- sapply(E(random_graph_50), function(e) {
   Ew_uniform[[as.character(e)]]
 })
 
-# Plot seed dots
+# Map edge_width to color_palette
+color_palette <- wes_palette(n=5, name="Zissou1")
+edge_color <- color_palette[cut(edge_width, breaks = 5)]
+
+# Plot the graph with gradient edge color
 par(mar=c(0,0,0,0)+.1)
 plot.igraph(random_graph_50, 
-     edge.width = edge_width, 
-     edge.arrow.size=0.4,
-     layout = layout.circle,
-     vertex.size=13, 
-     vertex.color = ifelse(1:vcount(random_graph_50) %in% S, "#FC888F","#A9AABC"))
+            edge.width = edge_width, 
+            edge.color = edge_color,
+            edge.arrow.size = 0.4,
+            layout = layout.circle,
+            vertex.label = NA,
+            vertex.size = 10, 
+            vertex.color = ifelse(1:vcount(random_graph_50) %in% S, "#FC888F", "#A9AABC"))
 
+
+# Try on 500 nodes
+random_graph_500 <- erdos.renyi.game(500, p = 0.05, directed = TRUE) # random graph set up
+S <- sample(1:vcount(random_graph_500), 2)  # Initial seed set of nodes
+
+# Equal edge weight for node v -> Calculate uniform edge weights
+Ew_uniform <- uniformWeights(random_graph_500)
+head(Ew_uniform)
+
+# Scale edge width based on the weights in Ew_uniform
+edge_width <- sapply(E(random_graph_500), function(e) {
+  v <- ends(random_graph_500, e)[2]
+  Ew_uniform[[as.character(e)]]
+})
 
 ## Run Linear Threshold model with uniform edge weights
-# activated_nodes <- runLT(random_graph_50, S, Ew_uniform) # single iteration
+# activated_nodes <- runLT(random_graph_500, S, Ew_uniform) # single iteration
 # activated_nodes
 
-active_df1 <- activeNodes(random_graph_50, S, Ew_uniform, iterations = 10)
+active_df1 <- activeNodes(random_graph_500, S, Ew_uniform, iterations = 10)
 paged_table(active_df1)
 
-active_df2 <- activeNodes(random_graph_50, S, Ew_uniform, iterations = 10)
-active_df3 <- activeNodes(random_graph_50, S, Ew_uniform, iterations = 10)
-active_df4 <- activeNodes(random_graph_50, S, Ew_uniform, iterations = 10)
-active_df5 <- activeNodes(random_graph_50, S, Ew_uniform, iterations = 10)
+active_df2 <- activeNodes(random_graph_500, S, Ew_uniform, iterations = 10)
+active_df3 <- activeNodes(random_graph_500, S, Ew_uniform, iterations = 10)
+active_df4 <- activeNodes(random_graph_500, S, Ew_uniform, iterations = 10)
+active_df5 <- activeNodes(random_graph_500, S, Ew_uniform, iterations = 10)
 
 active_df <- active_df1 %>% 
   left_join(active_df2, by = "iteration") %>% 
@@ -252,41 +296,56 @@ active_df %>%
         legend.box.just = "top")
 ```
 
+- Random edge weight for node v: 
+
 ```{r LTM random Ew}
 set.seed(123)
-# random_graph_50 <- erdos.renyi.game(50, p = 0.1, directed = TRUE) # random graph set up
+# random_graph_50 <- erdos.renyi.game(50, p = 0.05, directed = TRUE) # random graph set up
 # S <- sample(1:vcount(random_graph_50), 3)  # Initial seed set of nodes
 
 ## Calculate random edge weights -> Random edge weights, then normalized to sum <= 1
 Ew_random <- randomWeights(random_graph_50)
 head(Ew_random)
 
-# Scale edge width based on the weights in Ew_uniform
-edge_width <- sapply(E(random_graph_50), function(e) {
+# Scale edge width based on the weights in Ew_random
+edge_width_random <- sapply(E(random_graph_50), function(e) {
   v <- ends(random_graph_50, e)[2]
   Ew_random[[as.character(e)]]
 })
 
-# Plot seed dots
+# Map edge_width to color_palette
+color_palette <- wes_palette(n=5, name="Zissou1")
+edge_color <- color_palette[cut(edge_width_random, breaks = 5)]
+
+# Plot the graph with gradient edge color
 par(mar=c(0,0,0,0)+.1)
 plot.igraph(random_graph_50, 
-     edge.width = edge_width, 
-     edge.arrow.size=0.4,
-     layout = layout.circle,
-     vertex.size=13, 
-     vertex.color = ifelse(1:vcount(random_graph_50) %in% S, "#FC888F","#A9AABC"))
+            edge.width = edge_width_random, 
+            edge.color = edge_color,
+            edge.arrow.size = 0.4,
+            layout = layout.circle,
+            vertex.label = NA,
+            vertex.size = 10, 
+            vertex.color = ifelse(1:vcount(random_graph_50) %in% S, "#FC888F", "#A9AABC"))
+
+
+# Try on 500 nodes
+# random_graph_500 <- erdos.renyi.game(500, p = 0.05, directed = TRUE) # random graph set up
+# S <- sample(1:vcount(random_graph_500), 3)  # Initial seed set of nodes
+
+# Equal edge weight for node v -> Calculate uniform edge weights
+Ew_random <- randomWeights(random_graph_500)
+head(Ew_random)
 
 # Run Linear Threshold model with uniform edge weights
-# activated_nodes <- runLT(random_graph_50, S, Ew_random) # single iteration
+# activated_nodes <- runLT(random_graph_500, S, Ew_random) # single iteration
 # activated_nodes
 
-active_df1 <- activeNodes(random_graph_50, S, Ew_random, iterations = 10)
-paged_table(active_df1)
-
-active_df2 <- activeNodes(random_graph_50, S, Ew_random, iterations = 10)
-active_df3 <- activeNodes(random_graph_50, S, Ew_random, iterations = 10)
-active_df4 <- activeNodes(random_graph_50, S, Ew_random, iterations = 10)
-active_df5 <- activeNodes(random_graph_50, S, Ew_random, iterations = 10)
+active_df1 <- activeNodes(random_graph_500, S, Ew_random, iterations = 10)
+active_df2 <- activeNodes(random_graph_500, S, Ew_random, iterations = 10)
+active_df3 <- activeNodes(random_graph_500, S, Ew_random, iterations = 10)
+active_df4 <- activeNodes(random_graph_500, S, Ew_random, iterations = 10)
+active_df5 <- activeNodes(random_graph_500, S, Ew_random, iterations = 10)
 
 active_df <- active_df1 %>% 
   left_join(active_df2, by = "iteration") %>% 
@@ -298,6 +357,8 @@ active_df <- active_df1 %>%
          df3 = total_active_nodes.x.x,
          df4 = total_active_nodes.y.y,
          df5 = total_active_nodes)
+
+paged_table(head(active_df))
 
 active_df %>% 
   ggplot() + 
@@ -321,7 +382,7 @@ active_df %>%
 # Greedy Algorithm for LTM 
 ```{r}
 # Function to calculate average size of activated nodes
-avgLT <- function(G, S, Ew, iterations) {
+avgLT <- function(G, S, Ew, iterations=1) {
   avgSize <- 0
   for (i in 1:iterations) {
     T <- runLT(G, S, Ew)
@@ -337,19 +398,27 @@ Greedy_LTM <- function(G, Ew, k, iterations) {
   S <- c()  # Initialize the seed set
   
   for (i in 1:k) {
-    inf <- vector(mode = "list", length = vcount(G))  # Initialize the influence for nodes not in S
+    inf <- data.frame(nodes = V(G), influence = NA)  # Initialize the influence table
     
     # Calculate the influence for nodes not in S
     for (v in V(G)) {
       if (!(v %in% S)) {
-        inf[[as.character(v)]] <- avgLT(G, c(S, v), Ew, iterations)
+        inf$influence[v] <- avgLT(G, c(S, v), Ew, iterations = 1)
       }
     }
     
+    # Exclude nodes already in S
+    inf_excluded <- inf[!inf$nodes %in% S, ]
+    
     # Select the node with maximum influence and add it to the seed set
-    u <- which.max(unlist(inf))
-    print(paste("Selected node:", u, "with influence:", max(unlist(inf))))
-    S <- c(S, as.numeric(u)) # Convert node name to numeric and add it to seed set
+    u <- inf_excluded[which.max(inf_excluded$influence), ]$nodes
+    cat("Selected node:", u, "with influence:", max(inf_excluded$influence), "\n")
+  
+    # Convert node name to numeric
+    u <- as.numeric(u)
+    
+    # Add selected node to the seed set
+    S <- c(S, u)
   }
   
   end <- Sys.time()  # Record the end time
@@ -360,26 +429,54 @@ Greedy_LTM <- function(G, Ew, k, iterations) {
 }
 ```
 
+
 # Example: Greedy Algorithm of Influence Max Problem on LTM
 ```{r}
-set.seed(123)
 random_graph <- erdos.renyi.game(50, 0.1, directed = TRUE)
 # Calculate uniform edge weights
 Ew_uniform <- uniformWeights(random_graph)
-
-avg_size_uniform <- avgLT(random_graph, S, Ew_uniform, iterations = 10)
-avg_size_uniform
 
 # Run the Greedy_LTM function
 seed_set <- Greedy_LTM(random_graph, Ew_uniform, k = 3, iterations = 10)
 seed_set
 
-active_df_selectedSeed <- activeNodes(random_graph, seed_set, Ew_uniform, iterations = 20)
-paged_table(active_df_selectedSeed)
+active_df_selectedSeed <- activeNodes(random_graph, seed_set, Ew_uniform, iterations = 10)
+# paged_table(active_df_selectedSeed)
 
-S <- sample(1:vcount(random_graph_50), 3)  # Initial seed set of nodes
-active_df_randomSeed <- activeNodes(random_graph, S, Ew_uniform, iterations = 20)
-paged_table(active_df_randomSeed)
+S1 <- sample(1:vcount(random_graph), 3)  # Initial seed set of nodes
+S2 <- sample(1:vcount(random_graph), 3)  # Initial seed set of nodes
+S3 <- sample(1:vcount(random_graph), 3)  # Initial seed set of nodes
+
+active_df1 <- activeNodes(random_graph, S1, Ew_uniform, iterations = 10)
+active_df2 <- activeNodes(random_graph, S2, Ew_uniform, iterations = 10)
+active_df3 <- activeNodes(random_graph, S3, Ew_uniform, iterations = 10)
+
+active_df <- active_df1 %>% 
+  left_join(active_df2, by = "iteration") %>% 
+  left_join(active_df3, by = "iteration") %>% 
+  left_join(active_df_selectedSeed, by = "iteration") %>% 
+  rename(df1 = total_active_nodes.x,
+         df2 = total_active_nodes.y,
+         df3 = total_active_nodes.x.x,
+         greedy = total_active_nodes.y.y)
+
+paged_table(head(active_df))
+
+active_df %>% 
+  ggplot() + 
+  geom_line(aes(x = iteration, y = df1, color = "df1"), linetype = "solid") + 
+  geom_line(aes(x = iteration, y = df2, color = "df2"), linetype = "solid") + 
+  geom_line(aes(x = iteration, y = df3, color = "df3"), linetype = "solid") + 
+  geom_line(aes(x = iteration, y= greedy, color = "greedy"), linetype = "solid") + 
+  scale_color_manual(values = c("black", "black", "black", "#FC888F")) +
+  ylab("total_active_nodes") + 
+  labs(color = "Data", 
+       title = "Active Nodes over Iterations", 
+       subtitle = "3 random seed nodes with random edge weights") +
+  theme(legend.position = c(0.97, 0.02),
+        legend.justification = c(1, 0),
+        legend.box.background = element_rect(color = "black", linewidth = 0.5),
+        legend.box.just = "top")
 ```
 
 

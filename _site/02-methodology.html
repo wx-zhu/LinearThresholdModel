@@ -2143,6 +2143,14 @@ Algorithm
 <p>Linear Threshold Model (LTM) is one of the famous models simulating the spread of influence in networks. Continuing with the movie-inspired analogy, let’s delve into the mechanics of how influence spreads through a network, denoted as <span class="math inline">\(G\)</span>. In this directed network, each individual is represented as a node, categorized as either <strong><em>active</em></strong> (an adopter of the idea) or <strong><em>inactive</em></strong>. Drawing from our motivation, the general assumption is that each node tends to become active.</p>
 <p>Now, let’s consider the process in which nodes transition from being inactive to active. This transition occurs monotonically, meaning nodes can only shift from being inactive to active, but not the other way around. Thus, as time progresses, more and more of a node <span class="math inline">\(v\)</span>’s neighbors become active. At some point, a neighbor node <span class="math inline">\(w\)</span> influences <span class="math inline">\(v\)</span> to become active, triggering further decisions among other nodes connected to <span class="math inline">\(v\)</span>.</p>
 <h1 id="linear-threshold-model-ltm">Linear Threshold Model (LTM)</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="image/LTM_t.jpg" alt="Linear Threshold Model example" width="80%" />
+<p class="caption">
+Figure 1: Linear Threshold Model example
+</p>
+</div>
+</div>
 <p>In the Linear Threshold model, a node <span class="math inline">\(v\)</span> is influenced by each neighbor <span class="math inline">\(w\)</span> with a weight <span class="math inline">\(b_{v,w}\)</span> such that
 <span class="math display">\[\sum_{w \text{ neighbor of v}} b_{v,w} \le 1\]</span>
 . Each node <span class="math inline">\(v\)</span> has a threshold <span class="math inline">\(\theta_v\)</span> which is randomly drawn from the uniform distribution over the interval <span class="math inline">\([0,1]\)</span>, representing the different levels of tendency for each node to adopt the idea from their neighbors.</p>
@@ -2152,22 +2160,30 @@ Algorithm
 <p>The Influence Maximization Problem focuses on finding the best starting nodes to kick off the spread of influence in a network. It’s all about figuring out: Where should we begin to maximize the nodes’ impact?</p>
 <p>To crack this problem, we define the <strong><em>influence</em></strong> of a set of nodes <span class="math inline">\(A\)</span>, denoted as <span class="math inline">\(\sigma(A)\)</span>, as the expected number of active nodes at the end of the process, assuming <span class="math inline">\(A\)</span> is our initial set of active nodes <span class="math inline">\(A_0\)</span>. So, the goal of the influence maximization problem is to identify the best initial set of nodes <span class="math inline">\(A_0\)</span>, given a certain number <span class="math inline">\(k\)</span> where <span class="math inline">\(k\in \bf{N}\)</span>, to maximize our influence.</p>
 <p>This problem is important because it helps us understand how information or behavior spreads in networks. By finding the most influential starting points, we can set off a chain reaction that gets more and more people on board with our idea or action. This matters a lot in areas like marketing, where we want to reach as many customers as possible, in disease control, where we aim to stop outbreaks before they spread, and in understanding social networks, where we want to see how trends catch on among groups of people.</p>
-<h1 id="apporximation-for-influence-maximization">Apporximation for Influence Maximization</h1>
+<h3 id="apporximation-for-influence-maximization">Apporximation for Influence Maximization</h3>
 <p>However, it turns out that the influence maximization problem is acutally <strong>NP-hard</strong>, meaning that it could not be solved in polynomial time (assuming <span class="math inline">\(P\neq NP\)</span>). Thus, solving it efficiently isn’t straightforward–it’s a really complex problem that could take a long time to solve, especially as the size of the network is huge (Processing 30,000 nodes will take days to complete).</p>
 <p>Therefore, the best approach will be approximating the influence maximization problem. Here are several approximation guarantees to ensure that the following approximation method works.</p>
 <ul>
 <li><p>For an arbitrary instance of Linear Threshold Model, the resulting influence function <span class="math inline">\(\sigma(\cdot)\)</span> is <strong>submodular</strong>.</p>
 <ul>
-<li><p><span class="math inline">\(\sigma(\cdot)\)</span> is <em>submodular</em> if it exhibits the “diminishing marginal returns”, meaning that the marginal gain from adding a element to a set <span class="math inline">\(S\)</span> is at least as high as the marginal gain from adding the same element to <span class="math inline">\(T\)</span> where <span class="math inline">\(S\in T\)</span>. Mathematically, this is represented as: <span class="math inline">\(f(S\cup \{v\})-f(S) \ge f(T\cup \{v\})-f(T), \forall\)</span> elements <span class="math inline">\(v\)</span> and all pairs of sets <span class="math inline">\(S\in T\)</span>.</p></li>
+<li><p><span class="math inline">\(\sigma(\cdot)\)</span> is <em>submodular</em> if it exhibits the “diminishing marginal returns”, meaning that the marginal gain from adding a element to a set <span class="math inline">\(S\)</span> is at least as high as the marginal gain from adding the same element to <span class="math inline">\(T\)</span> where <span class="math inline">\(S\subseteq T\)</span>. Mathematically, this is represented as: <span class="math inline">\(f(S\cup \{v\})-f(S) \ge f(T\cup \{v\})-f(T), \forall\)</span> elements <span class="math inline">\(v\)</span> and all pairs of sets <span class="math inline">\(S\subseteq T\)</span>.</p></li>
 <li><p>Submodularity is important because it guarantees that the greedy algorithm’s approximation will not overshoot the optimal solution too much. Specifically, it ensures that the marginal gain achieved by adding a node to the seed set diminishes as the size of the seed set increases. This property allows the greedy algorithm to make locally optimal decisions at each step.</p></li>
 <li><p>This also implies that <span class="math inline">\(\sigma(\cdot)\)</span> is also a <em>monotone</em> function. This means that adding an element to the set cannot make the overall influence decrease, which aligns with the intuitive expectation that more influencers lead to more influence.</p></li>
 </ul></li>
 </ul>
-<h1 id="algorithm-greedy-hill-climbing">Algorithm: Greedy Hill-Climbing</h1>
+<h3 id="algorithm-greedy-hill-climbing">Algorithm: Greedy Hill-Climbing</h3>
 <p>One proposed approximation strategy is to use the greedy hill-climbing.</p>
 <p>Greedy hill-climbing is an iterative algorithm that begins with an arbitrary solution to a problem and then tries to enhance it by making small incremental adjustments. If a change results in a better solution, the algorithm adopts it and continues making further adjustments until no further improvements can be made.</p>
 <p>In the context of the influence maximization problem, we employ greedy hill-climbing to identify the most influential nodes. We begin with an empty active set <span class="math inline">\(A_0\)</span>. At each step <span class="math inline">\(i\)</span>, the algorithm selects one node to activate, aiming to maximize its influence on the network. However, it’s important to note that this approach may only lead to finding local maximum seed nodes, rather than a globally optimal solution.</p>
 <p>This approach achieves an approximation ratio of 63% but performs fairly slow and not salable.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="image/local_max.png" alt="Hill Climbing Algorithm" width="80%" />
+<p class="caption">
+Figure 2: Hill Climbing Algorithm
+</p>
+</div>
+</div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
