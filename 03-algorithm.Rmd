@@ -1,7 +1,7 @@
 ---
 title: "R code"
 description: |
-  In this section, we are going to explore the implementation of linear threshold model in R studio. 
+  In this coding section, we'll cover the implementation of the Linear Threshold Model in RStudio.
 code_folding: true
 ---
 
@@ -29,6 +29,7 @@ library(graphics)
 library(knitr)
 library(rmarkdown)
 library(wesanderson) # color
+library(animation) 
 
 theme_set(theme_bw())
 ```
@@ -117,7 +118,7 @@ activeNodes <- function(G, S, Ew, iterations) {
   
   for (i in 1:iterations) {
     T <- runLT(G, S, Ew)
-    cat("--", i,"T:  ", T, "\n")
+    message("--", i,"T:  ", T, "\n")
     total_active <- length(unique(T))  # Calculate the total active nodes in this iteration
     total_active_nodes[i] <- total_active  # Update total active nodes for current iteration
     
@@ -431,6 +432,98 @@ Greedy_LTM <- function(G, Ew, k, iterations) {
 
 
 # Example: Greedy Algorithm of Influence Max Problem on LTM
+
+### Animation
+```{r}
+# Adapt function to store the total number of active nodes at each iteration in list
+activeNodes_list <- function(G, S, Ew, iterations) {
+  active_df <- data.frame(iteration = integer(), 
+                          total_active_nodes = integer())
+  total_active_nodes <- rep(0, iterations)  # Initialize empty vector to store total active nodes
+  T_list <- list()  # Initialize list to store T values
+  
+  for (i in 1:iterations) {
+    T <- runLT(G, S, Ew)
+    # cat("--", i,"T:  ", T, "\n")
+    total_active <- length(unique(T))  # Calculate the total active nodes in this iteration
+    total_active_nodes[i] <- total_active  # Update total active nodes for current iteration
+    
+    # Limit total active nodes to the number of nodes in the graph
+    if (total_active_nodes[i] >= vcount(G)) {
+      total_active_nodes[i] <- vcount(G)  
+    }
+    
+    # Update data frame with current iteration's total active nodes
+    active_df <- rbind(active_df, data.frame(iteration = i, 
+                                             total_active_nodes = total_active_nodes[i]))
+    
+    # Store T values in the list
+    T_list[[i]] <- T
+    
+    # Update seed set S for the next iteration
+    S <- unique(c(S, T))
+  }
+  
+  return(list(active_df = active_df, T_list = T_list))
+}
+
+
+# Example usage
+random_graph <- erdos.renyi.game(50, 0.1, directed = TRUE)
+# Calculate uniform edge weights
+Ew_uniform <- uniformWeights(random_graph)
+
+# Run the Greedy_LTM function
+seed_set <- Greedy_LTM(random_graph, Ew_uniform, k = 3, iterations = 5)
+```
+
+```{r}
+active_df_selectedSeed <- activeNodes_list(random_graph, seed_set, Ew_uniform, iterations = 5)
+
+# Scale edge width based on the weights in Ew_uniform
+edge_width <- sapply(E(random_graph), function(e) {
+  v <- ends(random_graph, e)[2]
+  Ew_uniform[[as.character(e)]]
+})
+# Map edge_width to color_palette
+color_palette <- wes_palette(n = 5, name = "Zissou1")
+edge_color <- color_palette[cut(edge_width, breaks = 5)]
+
+
+# Add seed set to the beginning of T_list
+T_list_with_seed <- c(list(seed_set), active_df_selectedSeed[["T_list"]])
+
+# Create the GIF
+saveGIF(
+  expr = {
+    for (i in seq_along(T_list_with_seed)) {
+      T <- T_list_with_seed[[i]]
+      par(mar=c(6,0,0,0)+.1)
+      p <- plot.igraph(
+        random_graph,
+        edge.width = edge_width,
+        edge.color = edge_color,
+        edge.arrow.size = 0.4,
+        layout = layout.circle,
+        # vertex.label = NA,
+        vertex.size = 10,
+        vertex.color = ifelse(1:vcount(random_graph) %in% T, "#FC888F", "#A9AABC")
+      )
+      title(p, ifelse(i == 1, "Initial Seed Set", paste("In Step", i - 1)))
+    }
+  },
+  movie.name = "LTM_animation_greedy.gif",
+  clean = TRUE,
+  fps = 4,  # Adjust fps value as needed
+  fig.height = 4,  # Adjust figure height
+  fig.width = 6  # Adjust figure width
+)
+
+# include animation
+knitr::include_graphics("LTM_animation_greedy.gif")
+```
+
+### Simulation
 ```{r}
 random_graph <- erdos.renyi.game(50, 0.1, directed = TRUE)
 # Calculate uniform edge weights
@@ -439,6 +532,27 @@ Ew_uniform <- uniformWeights(random_graph)
 # Run the Greedy_LTM function
 seed_set <- Greedy_LTM(random_graph, Ew_uniform, k = 3, iterations = 10)
 seed_set
+
+# Scale edge width based on the weights in Ew_uniform
+edge_width <- sapply(E(random_graph), function(e) {
+  v <- ends(random_graph, e)[2]
+  Ew_uniform[[as.character(e)]]
+})
+
+# Map edge_width to color_palette
+color_palette <- wes_palette(n=5, name="Zissou1")
+edge_color <- color_palette[cut(edge_width, breaks = 5)]
+
+# Plot the graph with gradient edge color
+par(mar=c(0,0,0,0)+.1)
+p1 <- plot.igraph(random_graph, 
+            edge.width = edge_width, 
+            edge.color = edge_color,
+            edge.arrow.size = 0.4,
+            layout = layout.circle,
+            # vertex.label = NA,
+            vertex.size = 10, 
+            vertex.color =  ifelse(1:vcount(random_graph) %in% seed_set, "#FC888F", "#A9AABC"))
 
 active_df_selectedSeed <- activeNodes(random_graph, seed_set, Ew_uniform, iterations = 10)
 # paged_table(active_df_selectedSeed)
@@ -478,9 +592,4 @@ active_df %>%
         legend.box.background = element_rect(color = "black", linewidth = 0.5),
         legend.box.just = "top")
 ```
-
-
-
-
-
 

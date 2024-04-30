@@ -2073,6 +2073,330 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   </script>
 
+  <style type="text/css">
+  /* base variables */
+
+  /* Edit the CSS properties in this file to create a custom
+     Distill theme. Only edit values in the right column
+     for each row; values shown are the CSS defaults.
+     To return any property to the default,
+     you may set its value to: unset
+     All rows must end with a semi-colon.                      */
+
+  /* Optional: embed custom fonts here with `@import`          */
+  /* This must remain at the top of this file.                 */
+
+
+
+  html {
+    /*-- Main font sizes --*/
+    --title-size:      50px;
+    --body-size:       1.06rem;
+    --code-size:       14px;
+    --aside-size:      12px;
+    --fig-cap-size:    13px;
+    /*-- Main font colors --*/
+    --title-color:     #000000;
+    --header-color:    rgba(0, 0, 0, 0.8);
+    --body-color:      rgba(0, 0, 0, 0.8);
+    --aside-color:     rgba(0, 0, 0, 0.6);
+    --fig-cap-color:   rgba(0, 0, 0, 0.6);
+    /*-- Specify custom fonts ~~~ must be imported above   --*/
+    --heading-font:    sans-serif;
+    --mono-font:       monospace;
+    --body-font:       sans-serif;
+    --navbar-font:     sans-serif;  /* websites + blogs only */
+  }
+
+  /*-- ARTICLE METADATA --*/
+  d-byline {
+    --heading-size:    0.6rem;
+    --heading-color:   rgba(0, 0, 0, 0.5);
+    --body-size:       0.8rem;
+    --body-color:      rgba(0, 0, 0, 0.8);
+  }
+
+  /*-- ARTICLE TABLE OF CONTENTS --*/
+  .d-contents {
+    --heading-size:    18px;
+    --contents-size:   13px;
+  }
+
+  /*-- ARTICLE APPENDIX --*/
+  d-appendix {
+    --heading-size:    15px;
+    --heading-color:   rgba(0, 0, 0, 0.65);
+    --text-size:       0.8em;
+    --text-color:      rgba(0, 0, 0, 0.5);
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  /* These properties only apply to Distill sites and blogs  */
+
+  .distill-site-header {
+    --title-size:       18px;
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  .distill-site-footer {
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  /*-- Additional custom styles --*/
+  /* Add any additional CSS rules below                      */
+  </style>
+  <style type="text/css">
+  /* base variables */
+
+  /* Edit the CSS properties in this file to create a custom
+     Distill theme. Only edit values in the right column
+     for each row; values shown are the CSS defaults.
+     To return any property to the default,
+     you may set its value to: unset
+     All rows must end with a semi-colon.                      */
+
+  /* Optional: embed custom fonts here with `@import`          */
+  /* This must remain at the top of this file.                 */
+
+
+
+  html {
+    /*-- Main font sizes --*/
+    --title-size:      50px;
+    --body-size:       1.06rem;
+    --code-size:       14px;
+    --aside-size:      12px;
+    --fig-cap-size:    13px;
+    /*-- Main font colors --*/
+    --title-color:     #41493B;
+    --header-color:    rgba(0, 0, 0, 0.8);
+    --body-color:      rgba(0, 0, 0, 0.8);
+    --aside-color:     rgba(0, 0, 0, 0.6);
+    --fig-cap-color:   rgba(0, 0, 0, 0.6);
+    /*-- Specify custom fonts ~~~ must be imported above   --*/
+    --heading-font:    sans-serif;
+    --mono-font:       monospace;
+    --body-font:       sans-serif;
+    --navbar-font:     sans-serif;  /* websites + blogs only */
+  }
+
+  /*-- ARTICLE METADATA --*/
+  d-byline {
+    --heading-size:    0.6rem;
+    --heading-color:   rgba(0, 0, 0, 0.8);
+    --body-size:       0.8rem;
+    --body-color:      rgba(0, 0, 0, 0.8);
+  }
+
+  /*-- ARTICLE TABLE OF CONTENTS --*/
+  .d-contents {
+    --heading-size:    18px;
+    --contents-size:   13px;
+  }
+
+  /*-- ARTICLE APPENDIX --*/
+  d-appendix {
+    --heading-size:    15px;
+    --heading-color:   rgba(0, 0, 0, 0.65);
+    --text-size:       0.8em;
+    --text-color:      rgba(0, 0, 0, 0.5);
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  /* These properties only apply to Distill sites and blogs  */
+
+  .distill-site-header {
+    --title-size:       18px;
+    --text-color:       #EBFAE3;
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #9DB190;
+     /* background-image for fade-to-white color of navbar 
+     padding: 10px 0px;
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 1), #798C6C);   
+    background-color: transparent;*/
+  }
+
+  .distill-site-footer {
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #9DB190;
+  }
+
+  /*-- Additional custom styles --*/
+  /* Add any additional CSS rules below                      */
+
+  /* Customize the appearance of "Show code" feature */
+  d-article details {
+    color: #697C5E; /* Text color */
+    cursor: pointer; /* Change cursor on hover */
+  }
+
+  /* change the color of the hyperlink (<a> tag) within a paragraph (<p> tag)*/
+  p a {
+    color: #4C5D40; /* Change the color to red (replace with your desired color) */
+  }</style>
+  <style type="text/css">
+  /* base style */
+
+  /* FONT FAMILIES */
+
+  :root {
+    --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  body,
+  .posts-list .post-preview p,
+  .posts-list .description p {
+    font-family: var(--body-font), var(--body-default);
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .posts-list .post-preview h2,
+  .posts-list .description h2 {
+    font-family: var(--heading-font), var(--heading-default);
+  }
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: var(--mono-font), var(--mono-default);
+  }
+
+
+  /*-- TITLE --*/
+  d-title h1,
+  .posts-list > h1 {
+    color: var(--title-color, black);
+  }
+
+  d-title h1 {
+    font-size: var(--title-size, 50px);
+  }
+
+  /*-- HEADERS --*/
+  d-article h1,
+  d-article h2,
+  d-article h3,
+  d-article h4,
+  d-article h5,
+  d-article h6 {
+    color: var(--header-color, rgba(0, 0, 0, 0.8));
+  }
+
+  /*-- BODY --*/
+  d-article > p,  /* only text inside of <p> tags */
+  d-article > ul, /* lists */
+  d-article > ol {
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+    font-size: var(--body-size, 1.06rem);
+  }
+
+
+  /*-- CODE --*/
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-size: var(--code-size, 14px);
+  }
+
+  /*-- ASIDE --*/
+  d-article aside {
+    font-size: var(--aside-size, 12px);
+    color: var(--aside-color, rgba(0, 0, 0, 0.6));
+  }
+
+  /*-- FIGURE CAPTIONS --*/
+  figure .caption,
+  figure figcaption,
+  .figure .caption {
+    font-size: var(--fig-cap-size, 13px);
+    color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
+  }
+
+  /*-- METADATA --*/
+  d-byline h3 {
+    font-size: var(--heading-size, 0.6rem);
+    color: var(--heading-color, rgba(0, 0, 0, 0.5));
+  }
+
+  d-byline {
+    font-size: var(--body-size, 0.8rem);
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+  }
+
+  d-byline a,
+  d-article d-byline a {
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+  }
+
+  /*-- TABLE OF CONTENTS --*/
+  .d-contents nav h3 {
+    font-size: var(--heading-size, 18px);
+  }
+
+  .d-contents nav a {
+    font-size: var(--contents-size, 13px);
+  }
+
+  /*-- APPENDIX --*/
+  d-appendix h3 {
+    font-size: var(--heading-size, 15px);
+    color: var(--heading-color, rgba(0, 0, 0, 0.65));
+  }
+
+  d-appendix {
+    font-size: var(--text-size, 0.8em);
+    color: var(--text-color, rgba(0, 0, 0, 0.5));
+  }
+
+  d-appendix d-footnote-list a.footnote-backlink {
+    color: var(--text-color, rgba(0, 0, 0, 0.5));
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  .distill-site-header .title {
+    font-size: var(--title-size, 18px);
+    font-family: var(--navbar-font), var(--heading-default);
+  }
+
+  .distill-site-header a,
+  .nav-dropdown .nav-dropbtn {
+    font-family: var(--navbar-font), var(--heading-default);
+  }
+
+  .nav-dropdown .nav-dropbtn {
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    font-size: var(--text-size, 15px);
+  }
+
+  .distill-site-header a:hover,
+  .nav-dropdown:hover .nav-dropbtn {
+    color: var(--hover-color, white);
+  }
+
+  .distill-site-header {
+    font-size: var(--text-size, 15px);
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    background-color: var(--bkgd-color, #0F2E3D);
+  }
+
+  .distill-site-footer {
+    font-size: var(--text-size, 15px);
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    background-color: var(--bkgd-color, #0F2E3D);
+  }
+
+  .distill-site-footer a:hover {
+    color: var(--hover-color, white);
+  }</style>
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.22/header-attrs.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
@@ -2120,7 +2444,7 @@ Algorithm
 <a href="03-algorithm.html">R code</a>
 </div>
 </div>
-<a href="04-application.html">Application</a>
+<a href="04-more.html">More</a>
 <a href="https://github.com/wx-zhu/LinearThreshold_project">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
@@ -2155,6 +2479,7 @@ Algorithm
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://yihui.org/knitr/'>knitr</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/rmarkdown'>rmarkdown</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/karthik/wesanderson'>wesanderson</a></span><span class='op'>)</span> <span class='co'># color</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://yihui.org/animation/'>animation</a></span><span class='op'>)</span> </span>
 <span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
@@ -2612,7 +2937,7 @@ $`6`
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Function to calculate average size of activated nodes</span></span>
-<span><span class='va'>avgLT</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>S</span>, <span class='va'>Ew</span>, <span class='va'>iterations</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span><span class='va'>avgLT</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>S</span>, <span class='va'>Ew</span>, <span class='va'>iterations</span><span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>  <span class='va'>avgSize</span> <span class='op'>&lt;-</span> <span class='fl'>0</span></span>
 <span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>iterations</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>    <span class='cn'>T</span> <span class='op'>&lt;-</span> <span class='fu'>runLT</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>S</span>, <span class='va'>Ew</span><span class='op'>)</span></span>
@@ -2628,19 +2953,27 @@ $`6`
 <span>  <span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># Initialize the seed set</span></span>
 <span>  </span>
 <span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>k</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>    <span class='va'>inf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>vector</a></span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"list"</span>, length <span class='op'>=</span> <span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Initialize the influence for nodes not in S</span></span>
+<span>    <span class='va'>inf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>nodes <span class='op'>=</span> <span class='fu'><a href='https://r.igraph.org/reference/V.html'>V</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>, influence <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>  <span class='co'># Initialize the influence table</span></span>
 <span>    </span>
 <span>    <span class='co'># Calculate the influence for nodes not in S</span></span>
 <span>    <span class='kw'>for</span> <span class='op'>(</span><span class='va'>v</span> <span class='kw'>in</span> <span class='fu'><a href='https://r.igraph.org/reference/V.html'>V</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>      <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>v</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>S</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>        <span class='va'>inf</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'>avgLT</span><span class='op'>(</span><span class='va'>G</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>S</span>, <span class='va'>v</span><span class='op'>)</span>, <span class='va'>Ew</span>, <span class='va'>iterations</span><span class='op'>)</span></span>
+<span>        <span class='va'>inf</span><span class='op'>$</span><span class='va'>influence</span><span class='op'>[</span><span class='va'>v</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'>avgLT</span><span class='op'>(</span><span class='va'>G</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>S</span>, <span class='va'>v</span><span class='op'>)</span>, <span class='va'>Ew</span>, iterations <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
 <span>      <span class='op'>}</span></span>
 <span>    <span class='op'>}</span></span>
 <span>    </span>
+<span>    <span class='co'># Exclude nodes already in S</span></span>
+<span>    <span class='va'>inf_excluded</span> <span class='op'>&lt;-</span> <span class='va'>inf</span><span class='op'>[</span><span class='op'>!</span><span class='va'>inf</span><span class='op'>$</span><span class='va'>nodes</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>S</span>, <span class='op'>]</span></span>
+<span>    </span>
 <span>    <span class='co'># Select the node with maximum influence and add it to the seed set</span></span>
-<span>    <span class='va'>u</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/which.min.html'>which.max</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='va'>inf</span><span class='op'>)</span><span class='op'>)</span></span>
-<span>    <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"Selected node:"</span>, <span class='va'>u</span>, <span class='st'>"with influence:"</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='va'>inf</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
-<span>    <span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>S</span>, <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># Convert node name to numeric and add it to seed set</span></span>
+<span>    <span class='va'>u</span> <span class='op'>&lt;-</span> <span class='va'>inf_excluded</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/which.min.html'>which.max</a></span><span class='op'>(</span><span class='va'>inf_excluded</span><span class='op'>$</span><span class='va'>influence</span><span class='op'>)</span>, <span class='op'>]</span><span class='op'>$</span><span class='va'>nodes</span></span>
+<span>    <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='st'>"Selected node:"</span>, <span class='va'>u</span>, <span class='st'>"with influence:"</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>inf_excluded</span><span class='op'>$</span><span class='va'>influence</span><span class='op'>)</span>, <span class='st'>"\n"</span><span class='op'>)</span></span>
+<span>  </span>
+<span>    <span class='co'># Convert node name to numeric</span></span>
+<span>    <span class='va'>u</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>u</span><span class='op'>)</span></span>
+<span>    </span>
+<span>    <span class='co'># Add selected node to the seed set</span></span>
+<span>    <span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>S</span>, <span class='va'>u</span><span class='op'>)</span></span>
 <span>  <span class='op'>}</span></span>
 <span>  </span>
 <span>  <span class='va'>end</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># Record the end time</span></span>
@@ -2652,50 +2985,198 @@ $`6`
 </div>
 </div>
 <h1 id="example-greedy-algorithm-of-influence-max-problem-on-ltm">Example: Greedy Algorithm of Influence Max Problem on LTM</h1>
+<h3 id="animation">Animation</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Adapt function to store the total number of active nodes at each iteration in list</span></span>
+<span><span class='va'>activeNodes_list</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>S</span>, <span class='va'>Ew</span>, <span class='va'>iterations</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>active_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>iteration <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>integer</a></span><span class='op'>(</span><span class='op'>)</span>, </span>
+<span>                          total_active_nodes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>integer</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  <span class='va'>total_active_nodes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='va'>iterations</span><span class='op'>)</span>  <span class='co'># Initialize empty vector to store total active nodes</span></span>
+<span>  <span class='va'>T_list</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># Initialize list to store T values</span></span>
+<span>  </span>
+<span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>iterations</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='cn'>T</span> <span class='op'>&lt;-</span> <span class='fu'>runLT</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>S</span>, <span class='va'>Ew</span><span class='op'>)</span></span>
+<span>    <span class='co'># cat("--", i,"T:  ", T, "\n")</span></span>
+<span>    <span class='va'>total_active</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Calculate the total active nodes in this iteration</span></span>
+<span>    <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>total_active</span>  <span class='co'># Update total active nodes for current iteration</span></span>
+<span>    </span>
+<span>    <span class='co'># Limit total active nodes to the number of nodes in the graph</span></span>
+<span>    <span class='kw'>if</span> <span class='op'>(</span><span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&gt;=</span> <span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>      <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>  </span>
+<span>    <span class='op'>}</span></span>
+<span>    </span>
+<span>    <span class='co'># Update data frame with current iteration's total active nodes</span></span>
+<span>    <span class='va'>active_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>active_df</span>, <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>iteration <span class='op'>=</span> <span class='va'>i</span>, </span>
+<span>                                             total_active_nodes <span class='op'>=</span> <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>    </span>
+<span>    <span class='co'># Store T values in the list</span></span>
+<span>    <span class='va'>T_list</span><span class='op'>[[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>T</span></span>
+<span>    </span>
+<span>    <span class='co'># Update seed set S for the next iteration</span></span>
+<span>    <span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>S</span>, <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  <span class='op'>}</span></span>
+<span>  </span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>active_df <span class='op'>=</span> <span class='va'>active_df</span>, T_list <span class='op'>=</span> <span class='va'>T_list</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='op'>}</span></span>
+<span></span>
+<span></span>
+<span><span class='co'># Example usage</span></span>
 <span><span class='va'>random_graph</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/erdos.renyi.game.html'>erdos.renyi.game</a></span><span class='op'>(</span><span class='fl'>50</span>, <span class='fl'>0.1</span>, directed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span><span class='co'># Calculate uniform edge weights</span></span>
+<span><span class='va'>Ew_uniform</span> <span class='op'>&lt;-</span> <span class='fu'>uniformWeights</span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Run the Greedy_LTM function</span></span>
+<span><span class='va'>seed_set</span> <span class='op'>&lt;-</span> <span class='fu'>Greedy_LTM</span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>Ew_uniform</span>, k <span class='op'>=</span> <span class='fl'>3</span>, iterations <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>Selected node: 15 with influence: 39 
+Selected node: 11 with influence: 39 
+Selected node: 22 with influence: 44 
+[1] &quot;Total time: 0.149544954299927&quot;</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>active_df_selectedSeed</span> <span class='op'>&lt;-</span> <span class='fu'>activeNodes_list</span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>seed_set</span>, <span class='va'>Ew_uniform</span>, iterations <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Scale edge width based on the weights in Ew_uniform</span></span>
+<span><span class='va'>edge_width</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='https://r.igraph.org/reference/E.html'>E</a></span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/ends.html'>ends</a></span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span>  <span class='va'>Ew_uniform</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span></span>
+<span><span class='op'>}</span><span class='op'>)</span></span>
+<span><span class='co'># Map edge_width to color_palette</span></span>
+<span><span class='va'>color_palette</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/wesanderson/man/wes_palette.html'>wes_palette</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span>, name <span class='op'>=</span> <span class='st'>"Zissou1"</span><span class='op'>)</span></span>
+<span><span class='va'>edge_color</span> <span class='op'>&lt;-</span> <span class='va'>color_palette</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>edge_width</span>, breaks <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>]</span></span>
+<span></span>
+<span></span>
+<span><span class='co'># Add seed set to the beginning of T_list</span></span>
+<span><span class='va'>T_list_with_seed</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>seed_set</span><span class='op'>)</span>, <span class='va'>active_df_selectedSeed</span><span class='op'>[[</span><span class='st'>"T_list"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Create the GIF</span></span>
+<span><span class='fu'><a href='https://rdrr.io/pkg/animation/man/saveGIF.html'>saveGIF</a></span><span class='op'>(</span></span>
+<span>  expr <span class='op'>=</span> <span class='op'>{</span></span>
+<span>    <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='va'>T_list_with_seed</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>      <span class='cn'>T</span> <span class='op'>&lt;-</span> <span class='va'>T_list_with_seed</span><span class='op'>[[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>]</span></span>
+<span>      <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mar<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>6</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>.1</span><span class='op'>)</span></span>
+<span>      <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/plot.igraph.html'>plot.igraph</a></span><span class='op'>(</span></span>
+<span>        <span class='va'>random_graph</span>,</span>
+<span>        edge.width <span class='op'>=</span> <span class='va'>edge_width</span>,</span>
+<span>        edge.color <span class='op'>=</span> <span class='va'>edge_color</span>,</span>
+<span>        edge.arrow.size <span class='op'>=</span> <span class='fl'>0.4</span>,</span>
+<span>        layout <span class='op'>=</span> <span class='va'>layout.circle</span>,</span>
+<span>        <span class='co'># vertex.label = NA,</span></span>
+<span>        vertex.size <span class='op'>=</span> <span class='fl'>10</span>,</span>
+<span>        vertex.color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='cn'>T</span>, <span class='st'>"#FC888F"</span>, <span class='st'>"#A9AABC"</span><span class='op'>)</span></span>
+<span>      <span class='op'>)</span></span>
+<span>      <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span><span class='op'>(</span><span class='va'>p</span>, <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>i</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='st'>"Initial Seed Set"</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"In Step"</span>, <span class='va'>i</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>    <span class='op'>}</span></span>
+<span>  <span class='op'>}</span>,</span>
+<span>  movie.name <span class='op'>=</span> <span class='st'>"LTM_animation_greedy.gif"</span>,</span>
+<span>  clean <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
+<span>  fps <span class='op'>=</span> <span class='fl'>4</span>,  <span class='co'># Adjust fps value as needed</span></span>
+<span>  fig.height <span class='op'>=</span> <span class='fl'>4</span>,  <span class='co'># Adjust figure height</span></span>
+<span>  fig.width <span class='op'>=</span> <span class='fl'>6</span>  <span class='co'># Adjust figure width</span></span>
+<span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span></span>
+<span><span class='co'># include animation</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"LTM_animation_greedy.gif"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="LTM_animation_greedy.gif" style="display: block; margin: auto;" /></p>
+</div>
+<h3 id="simulation">Simulation</h3>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>random_graph</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/erdos.renyi.game.html'>erdos.renyi.game</a></span><span class='op'>(</span><span class='fl'>50</span>, <span class='fl'>0.1</span>, directed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span><span class='co'># Calculate uniform edge weights</span></span>
 <span><span class='va'>Ew_uniform</span> <span class='op'>&lt;-</span> <span class='fu'>uniformWeights</span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'># Run the Greedy_LTM function</span></span>
 <span><span class='va'>seed_set</span> <span class='op'>&lt;-</span> <span class='fu'>Greedy_LTM</span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>Ew_uniform</span>, k <span class='op'>=</span> <span class='fl'>3</span>, iterations <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code>[1] &quot;Selected node: 46 with influence: 17.9&quot;
-[1] &quot;Selected node: 48 with influence: 23.2&quot;
-[1] &quot;Selected node: 2 with influence: 27.1&quot;
-[1] &quot;Total time: 2.00193905830383&quot;</code></pre>
+<pre><code>Selected node: 35 with influence: 40 
+Selected node: 16 with influence: 45 
+Selected node: 13 with influence: 38 
+[1] &quot;Total time: 0.196632862091064&quot;</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>seed_set</span></span></code></pre>
 </div>
-<pre><code>[1] 46 48  2</code></pre>
+<pre><code>[1] 35 16 13</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span></span>
-<span><span class='co'># avg_size_uniform &lt;- avgLT(random_graph, seed_set, Ew_uniform, iterations = 10)</span></span>
-<span><span class='co'># avg_size_uniform</span></span>
+<span><span class='co'># Scale edge width based on the weights in Ew_uniform</span></span>
+<span><span class='va'>edge_width</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='https://r.igraph.org/reference/E.html'>E</a></span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/ends.html'>ends</a></span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span>  <span class='va'>Ew_uniform</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span></span>
+<span><span class='op'>}</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='va'>active_df_selectedSeed</span> <span class='op'>&lt;-</span> <span class='fu'>activeNodes</span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>seed_set</span>, <span class='va'>Ew_uniform</span>, iterations <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html'>paged_table</a></span><span class='op'>(</span><span class='va'>active_df_selectedSeed</span><span class='op'>)</span></span></code></pre>
+<span><span class='co'># Map edge_width to color_palette</span></span>
+<span><span class='va'>color_palette</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/wesanderson/man/wes_palette.html'>wes_palette</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>5</span>, name<span class='op'>=</span><span class='st'>"Zissou1"</span><span class='op'>)</span></span>
+<span><span class='va'>edge_color</span> <span class='op'>&lt;-</span> <span class='va'>color_palette</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>edge_width</span>, breaks <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>]</span></span>
+<span></span>
+<span><span class='co'># Plot the graph with gradient edge color</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mar<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>.1</span><span class='op'>)</span></span>
+<span><span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/plot.igraph.html'>plot.igraph</a></span><span class='op'>(</span><span class='va'>random_graph</span>, </span>
+<span>            edge.width <span class='op'>=</span> <span class='va'>edge_width</span>, </span>
+<span>            edge.color <span class='op'>=</span> <span class='va'>edge_color</span>,</span>
+<span>            edge.arrow.size <span class='op'>=</span> <span class='fl'>0.4</span>,</span>
+<span>            layout <span class='op'>=</span> <span class='va'>layout.circle</span>,</span>
+<span>            <span class='co'># vertex.label = NA,</span></span>
+<span>            vertex.size <span class='op'>=</span> <span class='fl'>10</span>, </span>
+<span>            vertex.color <span class='op'>=</span>  <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>seed_set</span>, <span class='st'>"#FC888F"</span>, <span class='st'>"#A9AABC"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<img src="03-algorithm_files/figure-html5/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span></span>
+<span><span class='va'>active_df_selectedSeed</span> <span class='op'>&lt;-</span> <span class='fu'>activeNodes</span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>seed_set</span>, <span class='va'>Ew_uniform</span>, iterations <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span>
+<span><span class='co'># paged_table(active_df_selectedSeed)</span></span>
+<span></span>
+<span><span class='va'>S1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span>, <span class='fl'>3</span><span class='op'>)</span>  <span class='co'># Initial seed set of nodes</span></span>
+<span><span class='va'>S2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span>, <span class='fl'>3</span><span class='op'>)</span>  <span class='co'># Initial seed set of nodes</span></span>
+<span><span class='va'>S3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span>, <span class='fl'>3</span><span class='op'>)</span>  <span class='co'># Initial seed set of nodes</span></span>
+<span></span>
+<span><span class='va'>active_df1</span> <span class='op'>&lt;-</span> <span class='fu'>activeNodes</span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>S1</span>, <span class='va'>Ew_uniform</span>, iterations <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span>
+<span><span class='va'>active_df2</span> <span class='op'>&lt;-</span> <span class='fu'>activeNodes</span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>S2</span>, <span class='va'>Ew_uniform</span>, iterations <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span>
+<span><span class='va'>active_df3</span> <span class='op'>&lt;-</span> <span class='fu'>activeNodes</span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>S3</span>, <span class='va'>Ew_uniform</span>, iterations <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>active_df</span> <span class='op'>&lt;-</span> <span class='va'>active_df1</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>active_df2</span>, by <span class='op'>=</span> <span class='st'>"iteration"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>active_df3</span>, by <span class='op'>=</span> <span class='st'>"iteration"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>active_df_selectedSeed</span>, by <span class='op'>=</span> <span class='st'>"iteration"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>df1 <span class='op'>=</span> <span class='va'>total_active_nodes.x</span>,</span>
+<span>         df2 <span class='op'>=</span> <span class='va'>total_active_nodes.y</span>,</span>
+<span>         df3 <span class='op'>=</span> <span class='va'>total_active_nodes.x.x</span>,</span>
+<span>         greedy <span class='op'>=</span> <span class='va'>total_active_nodes.y.y</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html'>paged_table</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>active_df</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["iteration"],"name":[1],"type":["int"],"align":["right"]},{"label":["total_active_nodes"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"6"},{"1":"2","2":"25"},{"1":"3","2":"39"},{"1":"4","2":"45"},{"1":"5","2":"47"},{"1":"6","2":"48"},{"1":"7","2":"48"},{"1":"8","2":"48"},{"1":"9","2":"48"},{"1":"10","2":"48"},{"1":"11","2":"48"},{"1":"12","2":"48"},{"1":"13","2":"48"},{"1":"14","2":"48"},{"1":"15","2":"48"},{"1":"16","2":"48"},{"1":"17","2":"48"},{"1":"18","2":"48"},{"1":"19","2":"48"},{"1":"20","2":"48"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["iteration"],"name":[1],"type":["int"],"align":["right"]},{"label":["df1"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["df2"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df3"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["greedy"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"14","3":"29","4":"8","5":"29","_rn_":"1"},{"1":"2","2":"43","3":"38","4":"24","5":"36","_rn_":"2"},{"1":"3","2":"46","3":"43","4":"39","5":"44","_rn_":"3"},{"1":"4","2":"47","3":"47","4":"43","5":"46","_rn_":"4"},{"1":"5","2":"47","3":"47","4":"46","5":"47","_rn_":"5"},{"1":"6","2":"47","3":"49","4":"46","5":"49","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span></span>
-<span><span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>random_graph_50</span><span class='op'>)</span>, <span class='fl'>3</span><span class='op'>)</span>  <span class='co'># Initial seed set of nodes</span></span>
-<span><span class='va'>active_df_randomSeed</span> <span class='op'>&lt;-</span> <span class='fu'>activeNodes</span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>S</span>, <span class='va'>Ew_uniform</span>, iterations <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html'>paged_table</a></span><span class='op'>(</span><span class='va'>active_df_randomSeed</span><span class='op'>)</span></span></code></pre>
+<span><span class='va'>active_df</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>iteration</span>, y <span class='op'>=</span> <span class='va'>df1</span>, color <span class='op'>=</span> <span class='st'>"df1"</span><span class='op'>)</span>, linetype <span class='op'>=</span> <span class='st'>"solid"</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>iteration</span>, y <span class='op'>=</span> <span class='va'>df2</span>, color <span class='op'>=</span> <span class='st'>"df2"</span><span class='op'>)</span>, linetype <span class='op'>=</span> <span class='st'>"solid"</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>iteration</span>, y <span class='op'>=</span> <span class='va'>df3</span>, color <span class='op'>=</span> <span class='st'>"df3"</span><span class='op'>)</span>, linetype <span class='op'>=</span> <span class='st'>"solid"</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>iteration</span>, y<span class='op'>=</span> <span class='va'>greedy</span>, color <span class='op'>=</span> <span class='st'>"greedy"</span><span class='op'>)</span>, linetype <span class='op'>=</span> <span class='st'>"solid"</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_color_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"black"</span>, <span class='st'>"black"</span>, <span class='st'>"black"</span>, <span class='st'>"#FC888F"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='st'>"total_active_nodes"</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"Data"</span>, </span>
+<span>       title <span class='op'>=</span> <span class='st'>"Active Nodes over Iterations"</span>, </span>
+<span>       subtitle <span class='op'>=</span> <span class='st'>"3 random seed nodes with random edge weights"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.97</span>, <span class='fl'>0.02</span><span class='op'>)</span>,</span>
+<span>        legend.justification <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>,</span>
+<span>        legend.box.background <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"black"</span>, linewidth <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>,</span>
+<span>        legend.box.just <span class='op'>=</span> <span class='st'>"top"</span><span class='op'>)</span></span></code></pre>
 </div>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["iteration"],"name":[1],"type":["int"],"align":["right"]},{"label":["total_active_nodes"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"17"},{"1":"2","2":"36"},{"1":"3","2":"42"},{"1":"4","2":"44"},{"1":"5","2":"48"},{"1":"6","2":"48"},{"1":"7","2":"48"},{"1":"8","2":"48"},{"1":"9","2":"48"},{"1":"10","2":"48"},{"1":"11","2":"48"},{"1":"12","2":"48"},{"1":"13","2":"48"},{"1":"14","2":"48"},{"1":"15","2":"48"},{"1":"16","2":"48"},{"1":"17","2":"48"},{"1":"18","2":"48"},{"1":"19","2":"48"},{"1":"20","2":"48"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<p><img src="03-algorithm_files/figure-html5/unnamed-chunk-7-2.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
-</div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

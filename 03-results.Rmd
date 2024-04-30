@@ -1,7 +1,7 @@
 ---
 title: "Results"
 description: |
-  I will cover several functions of the LTM and showcase some shiny apps for simulations! Click *Show Code* for the implementation. :)
+  Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click "Show Code" to see the implementation details. 
 code_folding: true
 ---
 
@@ -29,6 +29,7 @@ library(graphics)
 library(knitr)
 library(rmarkdown)
 library(wesanderson) # color
+library(animation)
 
 theme_set(theme_bw())
 ```
@@ -205,7 +206,7 @@ p1 <- plot.igraph(random_graph_50,
 ```
 
 ### Preferential attachment model
-Here's an example of the Preferential attachment model with 50 nodes. The graph follows a power-law distribution with power equal to $1$. Each nodes has a $5$ incoming edges. Similarly, using uniform edge weights, the edges vary in width and color: thinner and blue for smaller weights, and wider and red for larger weights.
+Here's an example of the Preferential attachment model with 50 nodes. The graph follows a power-law distribution with power equal to $1$. Each node connects to the existing nodes with a fixed number $m$ of links. Similarly, using uniform edge weights, the edges vary in width and color: thinner and blue for smaller weights, and wider and red for larger weights.
 
 > **What is power law?** In network science, it describes the distribution of node degrees, where a few nodes have many connections while most nodes have few connections.
 
@@ -245,9 +246,10 @@ p1 <- plot.igraph(random_graph_50,
 
 ## Example Usage for LTM
 
-Experiment with various simulation setup! The plot and table depict the total active nodes for each iteration in five random graphs labeled as `df1` to `df5`. If the plot displays a horizontal line, it suggests no increase in active nodes, which can occur. Attempt running the simulation multiple times to observe changes. 
+Experiment with various simulation setup! The plot and table depict the total active nodes for each iteration in five random graphs labeled as `df1` to `df5`. 
+If the plot displays a horizontal line, it suggests no increase in active nodes, which can occur. Attempt running the simulation multiple times to observe changes. 
 
-<iframe src="https://wx-zhu.shinyapps.io/LTM_simulation/" class="l-body-outset shaded" height="1000px"></iframe>
+<iframe src="https://wx-zhu.shinyapps.io/LTM_simulation/" class="l-page shaded" height="1000px"></iframe>
 
 
 # Greedy Algorithm for LTM 
@@ -308,10 +310,118 @@ Greedy_LTM <- function(G, Ew, k, iterations) {
 
 ## Example: Greedy Algorithm of Influence Max Problem on LTM
 
+### Animation
+
+To illustrate the iterative process of the greedy algorithm, I've added a brief animation depicting how the active nodes increase based on the initial seed set. I modified the `activeNodes` function to `activeNodes_list`, which stores the names of active nodes in each iteration in a list.
+
+Using this approach, I applied the hill-climbing algorithm to the Erdős–Rényi model with 50 nodes and uniform edge weights to select 3 initial active nodes. The animation showcases the activation process over 5 iterations.
+
+```{r code_folding=TRUE}
+# Adapt function to store the total number of active nodes at each iteration in list
+activeNodes_list <- function(G, S, Ew, iterations) {
+  active_df <- data.frame(iteration = integer(), 
+                          total_active_nodes = integer())
+  total_active_nodes <- rep(0, iterations)  # Initialize empty vector to store total active nodes
+  T_list <- list()  # Initialize list to store T values
+  
+  for (i in 1:iterations) {
+    T <- runLT(G, S, Ew)
+    # cat("--", i,"T:  ", T, "\n")
+    total_active <- length(unique(T))  # Calculate the total active nodes in this iteration
+    total_active_nodes[i] <- total_active  # Update total active nodes for current iteration
+    
+    # Limit total active nodes to the number of nodes in the graph
+    if (total_active_nodes[i] >= vcount(G)) {
+      total_active_nodes[i] <- vcount(G)  
+    }
+    
+    # Update data frame with current iteration's total active nodes
+    active_df <- rbind(active_df, data.frame(iteration = i, 
+                                             total_active_nodes = total_active_nodes[i]))
+    
+    # Store T values in the list
+    T_list[[i]] <- T
+    
+    # Update seed set S for the next iteration
+    S <- unique(c(S, T))
+  }
+  
+  return(list(active_df = active_df, T_list = T_list))
+}
+
+
+# Example usage
+random_graph <- erdos.renyi.game(50, 0.1, directed = TRUE)
+# Calculate uniform edge weights
+Ew_uniform <- uniformWeights(random_graph)
+
+# Run the Greedy_LTM function
+seed_set <- Greedy_LTM(random_graph, Ew_uniform, k = 3, iterations = 5)
+```
+
+```{r code_folding=TRUE}
+active_df_selectedSeed <- activeNodes_list(random_graph, seed_set, Ew_uniform, iterations = 5)
+
+# Scale edge width based on the weights in Ew_uniform
+edge_width <- sapply(E(random_graph), function(e) {
+  v <- ends(random_graph, e)[2]
+  Ew_uniform[[as.character(e)]]
+})
+# Map edge_width to color_palette
+color_palette <- wes_palette(n = 5, name = "Zissou1")
+edge_color <- color_palette[cut(edge_width, breaks = 5)]
+
+
+# Add seed set to the beginning of T_list
+T_list_with_seed <- c(list(seed_set), active_df_selectedSeed[["T_list"]])
+
+# Create the GIF
+saveGIF(
+  expr = {
+    for (i in seq_along(T_list_with_seed)) {
+      T <- T_list_with_seed[[i]]
+      par(mar=c(6,0,0,0)+.1)
+      p <- plot.igraph(
+        random_graph,
+        edge.width = edge_width,
+        edge.color = edge_color,
+        edge.arrow.size = 0.4,
+        layout = layout.circle,
+        # vertex.label = NA,
+        vertex.size = 10,
+        vertex.color = ifelse(1:vcount(random_graph) %in% T, "#FC888F", "#A9AABC")
+      )
+      title(p, ifelse(i == 1, "Initial Seed Set", paste("In Step", i - 1)))
+    }
+  },
+  movie.name = "LTM_animation_greedy.gif",
+  clean = TRUE,
+  fps = 4,  # Adjust fps value as needed
+  fig.height = 4,  # Adjust figure height
+  fig.width = 6  # Adjust figure width
+)
+
+# include animation
+knitr::include_graphics("LTM_animation_greedy.gif")
+```
+
+
+### Simulation
+
 The plot and table show the total active nodes for each iteration in three randomly generated graphs labeled as `df1` to `df3`, and one graph with initially selected active nodes denoted as `greedy`.  If the plot displays a horizontal line, it suggests no increase in active nodes, which can occur. Attempt running the simulation multiple times to observe changes. 
 
-Please be patient as the algorithm may take a few minutes to run.
+Please be patient as the algorithm may take a few minutes to run for complicated setup.
 
-<iframe src="https://wx-zhu.shinyapps.io/LTM_greedy/" class="l-body-outset shaded" height="1000px"></iframe>
+<iframe src="https://wx-zhu.shinyapps.io/LTM_greedy/" class="l-page shaded" height="1000px"></iframe>
+
+
+
+## References {.appendix}
+- ERDdS, P., & R&wi, A. (1959). On random graphs I. Publ. math. debrecen, 6(290-297), 18.
+
+- Barabási, A. L., & Albert, R. (1999). Emergence of scaling in random networks. science, 286(5439), 509-512.
+
+
+
 
 

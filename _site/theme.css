@@ -21,7 +21,7 @@ html {
   --aside-size:      12px;
   --fig-cap-size:    13px;
   /*-- Main font colors --*/
-  --title-color:     #000000;
+  --title-color:     #41493B;
   --header-color:    rgba(0, 0, 0, 0.8);
   --body-color:      rgba(0, 0, 0, 0.8);
   --aside-color:     rgba(0, 0, 0, 0.6);
@@ -36,7 +36,7 @@ html {
 /*-- ARTICLE METADATA --*/
 d-byline {
   --heading-size:    0.6rem;
-  --heading-color:   rgba(0, 0, 0, 0.5);
+  --heading-color:   rgba(0, 0, 0, 0.8);
   --body-size:       0.8rem;
   --body-color:      rgba(0, 0, 0, 0.8);
 }
@@ -60,19 +60,33 @@ d-appendix {
 
 .distill-site-header {
   --title-size:       18px;
-  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-color:       #EBFAE3;
   --text-size:        15px;
   --hover-color:      white;
-  --bkgd-color:       #0F2E3D;
+  --bkgd-color:       #9DB190;
+   /* background-image for fade-to-white color of navbar 
+   padding: 10px 0px;
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 1), #798C6C);   
+  background-color: transparent;*/
 }
 
 .distill-site-footer {
   --text-color:       rgba(255, 255, 255, 0.8);
   --text-size:        15px;
   --hover-color:      white;
-  --bkgd-color:       #0F2E3D;
+  --bkgd-color:       #9DB190;
 }
 
 /*-- Additional custom styles --*/
 /* Add any additional CSS rules below                      */
 
+/* Customize the appearance of "Show code" feature */
+d-article details {
+  color: #697C5E; /* Text color */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/* change the color of the hyperlink (<a> tag) within a paragraph (<p> tag)*/
+p a {
+  color: #4C5D40; /* Change the color to red (replace with your desired color) */
+}

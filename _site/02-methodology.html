@@ -90,27 +90,27 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>Linear Threshold Models: Methodology</title>
 
-  <meta property="description" itemprop="description" content="Some additional details about the website"/>
+  <meta property="description" itemprop="description" content="The methodology section introduces the Linear Threshold Model (LTM), a tool used to simulate influence propagation in networks. It explains the significance of solving the influence maximization problem and outlines the hill-climbing algorithm used for optimization."/>
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Linear Threshold Models: Methodology"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Some additional details about the website"/>
+  <meta property="og:description" content="The methodology section introduces the Linear Threshold Model (LTM), a tool used to simulate influence propagation in networks. It explains the significance of solving the influence maximization problem and outlines the hill-climbing algorithm used for optimization."/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Linear Threshold Models"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Linear Threshold Models: Methodology"/>
-  <meta property="twitter:description" content="Some additional details about the website"/>
+  <meta property="twitter:description" content="The methodology section introduces the Linear Threshold Model (LTM), a tool used to simulate influence propagation in networks. It explains the significance of solving the influence maximization problem and outlines the hill-climbing algorithm used for optimization."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","code_folding"]}},"value":[{"type":"character","attributes":{},"value":["Methodology"]},{"type":"character","attributes":{},"value":["Some additional details about the website\n"]},{"type":"logical","attributes":{},"value":[true]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","code_folding"]}},"value":[{"type":"character","attributes":{},"value":["Methodology"]},{"type":"character","attributes":{},"value":["The methodology section introduces the Linear Threshold Model (LTM), a tool used to simulate influence propagation in networks. It explains the significance of solving the influence maximization problem and outlines the hill-climbing algorithm used for optimization.\n"]},{"type":"logical","attributes":{},"value":[true]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2073,6 +2073,330 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   </script>
 
+  <style type="text/css">
+  /* base variables */
+
+  /* Edit the CSS properties in this file to create a custom
+     Distill theme. Only edit values in the right column
+     for each row; values shown are the CSS defaults.
+     To return any property to the default,
+     you may set its value to: unset
+     All rows must end with a semi-colon.                      */
+
+  /* Optional: embed custom fonts here with `@import`          */
+  /* This must remain at the top of this file.                 */
+
+
+
+  html {
+    /*-- Main font sizes --*/
+    --title-size:      50px;
+    --body-size:       1.06rem;
+    --code-size:       14px;
+    --aside-size:      12px;
+    --fig-cap-size:    13px;
+    /*-- Main font colors --*/
+    --title-color:     #000000;
+    --header-color:    rgba(0, 0, 0, 0.8);
+    --body-color:      rgba(0, 0, 0, 0.8);
+    --aside-color:     rgba(0, 0, 0, 0.6);
+    --fig-cap-color:   rgba(0, 0, 0, 0.6);
+    /*-- Specify custom fonts ~~~ must be imported above   --*/
+    --heading-font:    sans-serif;
+    --mono-font:       monospace;
+    --body-font:       sans-serif;
+    --navbar-font:     sans-serif;  /* websites + blogs only */
+  }
+
+  /*-- ARTICLE METADATA --*/
+  d-byline {
+    --heading-size:    0.6rem;
+    --heading-color:   rgba(0, 0, 0, 0.5);
+    --body-size:       0.8rem;
+    --body-color:      rgba(0, 0, 0, 0.8);
+  }
+
+  /*-- ARTICLE TABLE OF CONTENTS --*/
+  .d-contents {
+    --heading-size:    18px;
+    --contents-size:   13px;
+  }
+
+  /*-- ARTICLE APPENDIX --*/
+  d-appendix {
+    --heading-size:    15px;
+    --heading-color:   rgba(0, 0, 0, 0.65);
+    --text-size:       0.8em;
+    --text-color:      rgba(0, 0, 0, 0.5);
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  /* These properties only apply to Distill sites and blogs  */
+
+  .distill-site-header {
+    --title-size:       18px;
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  .distill-site-footer {
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  /*-- Additional custom styles --*/
+  /* Add any additional CSS rules below                      */
+  </style>
+  <style type="text/css">
+  /* base variables */
+
+  /* Edit the CSS properties in this file to create a custom
+     Distill theme. Only edit values in the right column
+     for each row; values shown are the CSS defaults.
+     To return any property to the default,
+     you may set its value to: unset
+     All rows must end with a semi-colon.                      */
+
+  /* Optional: embed custom fonts here with `@import`          */
+  /* This must remain at the top of this file.                 */
+
+
+
+  html {
+    /*-- Main font sizes --*/
+    --title-size:      50px;
+    --body-size:       1.06rem;
+    --code-size:       14px;
+    --aside-size:      12px;
+    --fig-cap-size:    13px;
+    /*-- Main font colors --*/
+    --title-color:     #41493B;
+    --header-color:    rgba(0, 0, 0, 0.8);
+    --body-color:      rgba(0, 0, 0, 0.8);
+    --aside-color:     rgba(0, 0, 0, 0.6);
+    --fig-cap-color:   rgba(0, 0, 0, 0.6);
+    /*-- Specify custom fonts ~~~ must be imported above   --*/
+    --heading-font:    sans-serif;
+    --mono-font:       monospace;
+    --body-font:       sans-serif;
+    --navbar-font:     sans-serif;  /* websites + blogs only */
+  }
+
+  /*-- ARTICLE METADATA --*/
+  d-byline {
+    --heading-size:    0.6rem;
+    --heading-color:   rgba(0, 0, 0, 0.8);
+    --body-size:       0.8rem;
+    --body-color:      rgba(0, 0, 0, 0.8);
+  }
+
+  /*-- ARTICLE TABLE OF CONTENTS --*/
+  .d-contents {
+    --heading-size:    18px;
+    --contents-size:   13px;
+  }
+
+  /*-- ARTICLE APPENDIX --*/
+  d-appendix {
+    --heading-size:    15px;
+    --heading-color:   rgba(0, 0, 0, 0.65);
+    --text-size:       0.8em;
+    --text-color:      rgba(0, 0, 0, 0.5);
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  /* These properties only apply to Distill sites and blogs  */
+
+  .distill-site-header {
+    --title-size:       18px;
+    --text-color:       #EBFAE3;
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #9DB190;
+     /* background-image for fade-to-white color of navbar 
+     padding: 10px 0px;
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 1), #798C6C);   
+    background-color: transparent;*/
+  }
+
+  .distill-site-footer {
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #9DB190;
+  }
+
+  /*-- Additional custom styles --*/
+  /* Add any additional CSS rules below                      */
+
+  /* Customize the appearance of "Show code" feature */
+  d-article details {
+    color: #697C5E; /* Text color */
+    cursor: pointer; /* Change cursor on hover */
+  }
+
+  /* change the color of the hyperlink (<a> tag) within a paragraph (<p> tag)*/
+  p a {
+    color: #4C5D40; /* Change the color to red (replace with your desired color) */
+  }</style>
+  <style type="text/css">
+  /* base style */
+
+  /* FONT FAMILIES */
+
+  :root {
+    --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  body,
+  .posts-list .post-preview p,
+  .posts-list .description p {
+    font-family: var(--body-font), var(--body-default);
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .posts-list .post-preview h2,
+  .posts-list .description h2 {
+    font-family: var(--heading-font), var(--heading-default);
+  }
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: var(--mono-font), var(--mono-default);
+  }
+
+
+  /*-- TITLE --*/
+  d-title h1,
+  .posts-list > h1 {
+    color: var(--title-color, black);
+  }
+
+  d-title h1 {
+    font-size: var(--title-size, 50px);
+  }
+
+  /*-- HEADERS --*/
+  d-article h1,
+  d-article h2,
+  d-article h3,
+  d-article h4,
+  d-article h5,
+  d-article h6 {
+    color: var(--header-color, rgba(0, 0, 0, 0.8));
+  }
+
+  /*-- BODY --*/
+  d-article > p,  /* only text inside of <p> tags */
+  d-article > ul, /* lists */
+  d-article > ol {
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+    font-size: var(--body-size, 1.06rem);
+  }
+
+
+  /*-- CODE --*/
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-size: var(--code-size, 14px);
+  }
+
+  /*-- ASIDE --*/
+  d-article aside {
+    font-size: var(--aside-size, 12px);
+    color: var(--aside-color, rgba(0, 0, 0, 0.6));
+  }
+
+  /*-- FIGURE CAPTIONS --*/
+  figure .caption,
+  figure figcaption,
+  .figure .caption {
+    font-size: var(--fig-cap-size, 13px);
+    color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
+  }
+
+  /*-- METADATA --*/
+  d-byline h3 {
+    font-size: var(--heading-size, 0.6rem);
+    color: var(--heading-color, rgba(0, 0, 0, 0.5));
+  }
+
+  d-byline {
+    font-size: var(--body-size, 0.8rem);
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+  }
+
+  d-byline a,
+  d-article d-byline a {
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+  }
+
+  /*-- TABLE OF CONTENTS --*/
+  .d-contents nav h3 {
+    font-size: var(--heading-size, 18px);
+  }
+
+  .d-contents nav a {
+    font-size: var(--contents-size, 13px);
+  }
+
+  /*-- APPENDIX --*/
+  d-appendix h3 {
+    font-size: var(--heading-size, 15px);
+    color: var(--heading-color, rgba(0, 0, 0, 0.65));
+  }
+
+  d-appendix {
+    font-size: var(--text-size, 0.8em);
+    color: var(--text-color, rgba(0, 0, 0, 0.5));
+  }
+
+  d-appendix d-footnote-list a.footnote-backlink {
+    color: var(--text-color, rgba(0, 0, 0, 0.5));
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  .distill-site-header .title {
+    font-size: var(--title-size, 18px);
+    font-family: var(--navbar-font), var(--heading-default);
+  }
+
+  .distill-site-header a,
+  .nav-dropdown .nav-dropbtn {
+    font-family: var(--navbar-font), var(--heading-default);
+  }
+
+  .nav-dropdown .nav-dropbtn {
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    font-size: var(--text-size, 15px);
+  }
+
+  .distill-site-header a:hover,
+  .nav-dropdown:hover .nav-dropbtn {
+    color: var(--hover-color, white);
+  }
+
+  .distill-site-header {
+    font-size: var(--text-size, 15px);
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    background-color: var(--bkgd-color, #0F2E3D);
+  }
+
+  .distill-site-footer {
+    font-size: var(--text-size, 15px);
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    background-color: var(--bkgd-color, #0F2E3D);
+  }
+
+  .distill-site-footer a:hover {
+    color: var(--hover-color, white);
+  }</style>
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.22/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
@@ -2094,7 +2418,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Methodology","description":"Some additional details about the website","authors":[]}
+{"title":"Methodology","description":"The methodology section introduces the Linear Threshold Model (LTM), a tool used to simulate influence propagation in networks. It explains the significance of solving the influence maximization problem and outlines the hill-climbing algorithm used for optimization.","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2118,7 +2442,7 @@ Algorithm
 <a href="03-algorithm.html">R code</a>
 </div>
 </div>
-<a href="04-application.html">Application</a>
+<a href="04-more.html">More</a>
 <a href="https://github.com/wx-zhu/LinearThreshold_project">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
@@ -2134,7 +2458,7 @@ Algorithm
 <h1>Methodology</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Some additional details about the website</p></p>
+<p><p>The methodology section introduces the Linear Threshold Model (LTM), a tool used to simulate influence propagation in networks. It explains the significance of solving the influence maximization problem and outlines the hill-climbing algorithm used for optimization.</p></p>
 </div>
 
 
@@ -2159,6 +2483,7 @@ Figure 1: Linear Threshold Model example
 <h1 id="influence-maximization-problem">Influence Maximization Problem</h1>
 <p>The Influence Maximization Problem focuses on finding the best starting nodes to kick off the spread of influence in a network. It’s all about figuring out: Where should we begin to maximize the nodes’ impact?</p>
 <p>To crack this problem, we define the <strong><em>influence</em></strong> of a set of nodes <span class="math inline">\(A\)</span>, denoted as <span class="math inline">\(\sigma(A)\)</span>, as the expected number of active nodes at the end of the process, assuming <span class="math inline">\(A\)</span> is our initial set of active nodes <span class="math inline">\(A_0\)</span>. So, the goal of the influence maximization problem is to identify the best initial set of nodes <span class="math inline">\(A_0\)</span>, given a certain number <span class="math inline">\(k\)</span> where <span class="math inline">\(k\in \bf{N}\)</span>, to maximize our influence.</p>
+<h3 id="why-is-it-important">Why is it important?</h3>
 <p>This problem is important because it helps us understand how information or behavior spreads in networks. By finding the most influential starting points, we can set off a chain reaction that gets more and more people on board with our idea or action. This matters a lot in areas like marketing, where we want to reach as many customers as possible, in disease control, where we aim to stop outbreaks before they spread, and in understanding social networks, where we want to see how trends catch on among groups of people.</p>
 <h3 id="apporximation-for-influence-maximization">Apporximation for Influence Maximization</h3>
 <p>However, it turns out that the influence maximization problem is acutally <strong>NP-hard</strong>, meaning that it could not be solved in polynomial time (assuming <span class="math inline">\(P\neq NP\)</span>). Thus, solving it efficiently isn’t straightforward–it’s a really complex problem that could take a long time to solve, especially as the size of the network is huge (Processing 30,000 nodes will take days to complete).</p>
@@ -2178,12 +2503,18 @@ Figure 1: Linear Threshold Model example
 <p>This approach achieves an approximation ratio of 63% but performs fairly slow and not salable.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
-<img src="image/local_max.png" alt="Hill Climbing Algorithm" width="80%" />
+<img src="image/local_max.png" alt="Hill Climbing Algorithm. Created by Mahyavanshi, B." width="80%" />
 <p class="caption">
-Figure 2: Hill Climbing Algorithm
+Figure 2: Hill Climbing Algorithm. Created by Mahyavanshi, B.
 </p>
 </div>
 </div>
+<h2 class="appendix" id="references">References</h2>
+<ul>
+<li><p>Chen, W., Yuan, Y., &amp; Zhang, L. (2010). Scalable Influence Maximization in Social Networks under the Linear Threshold Model. 2010 IEEE International Conference on Data Mining, 88-97.</p></li>
+<li><p>Kempe, D., Kleinberg, J.M., &amp; Tardos, É. (2003). Maximizing the spread of influence through a social network. Theory Comput., 11, 105-147.</p></li>
+<li><p>Mahyavanshi, B. (2019, September 8). Introduction to hill climbing: Artificial intelligence. Medium. <a href="https://medium.com/@bhavek.mahyavanshi50/introduction-to-hill-climbing-artificial-intelligence-a3714ed2d8d8" class="uri">https://medium.com/@bhavek.mahyavanshi50/introduction-to-hill-climbing-artificial-intelligence-a3714ed2d8d8</a></p></li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

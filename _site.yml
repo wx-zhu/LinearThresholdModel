@@ -1,8 +1,10 @@
 name: "LT_website"
 title: "Linear Threshold Models"
+theme: "theme.css"
 description: |
   Linear Threshold Models
 output_dir: "_site"
+author: Wenxuan Zhu
 navbar:
   right:
     - text: "Intro"
@@ -15,8 +17,9 @@ navbar:
           href: 03-results.html
         - text: "R code"
           href: 03-algorithm.html
-    - text: "Application"
-      href: 04-application.html
+    - text: "More"
+      href: 04-more.html
     - icon: fab fa-github
       href: https://github.com/wx-zhu/LinearThreshold_project
 output: distill::distill_article
+css: theme.css

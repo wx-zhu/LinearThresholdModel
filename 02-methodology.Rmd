@@ -1,7 +1,7 @@
 ---
 title: "Methodology"
 description: |
-  Some additional details about the website
+  The methodology section introduces the Linear Threshold Model (LTM), a tool used to simulate influence propagation in networks. It explains the significance of solving the influence maximization problem and outlines the hill-climbing algorithm used for optimization.
 code_folding: true
 ---
 
@@ -36,6 +36,9 @@ The Influence Maximization Problem focuses on finding the best starting nodes to
 
 To crack this problem, we define the ***influence*** of a set of nodes $A$, denoted as $\sigma(A)$, as the expected number of active nodes at the end of the process, assuming $A$ is our initial set of active nodes $A_0$. So, the goal of the influence maximization problem is to identify the best initial set of nodes $A_0$, given a certain number $k$ where $k\in \bf{N}$, to maximize our influence.
 
+
+### Why is it important?
+
 This problem is important because it helps us understand how information or behavior spreads in networks. By finding the most influential starting points, we can set off a chain reaction that gets more and more people on board with our idea or action. This matters a lot in areas like marketing, where we want to reach as many customers as possible, in disease control, where we aim to stop outbreaks before they spread, and in understanding social networks, where we want to see how trends catch on among groups of people.
 
 
@@ -51,7 +54,8 @@ Therefore, the best approach will be approximating the influence maximization pr
   
   - Submodularity is important because it guarantees that the greedy algorithm's approximation will not overshoot the optimal solution too much. Specifically, it ensures that the marginal gain achieved by adding a node to the seed set diminishes as the size of the seed set increases. This property allows the greedy algorithm to make locally optimal decisions at each step.
 
-  - This also implies that $\sigma(\cdot)$ is also a *monotone* function. This means that adding an element to the set cannot make the overall influence decrease, which aligns with the intuitive expectation that more influencers lead to more influence.
+  - This also implies that $\sigma(\cdot)$ is also a *monotone* function. This means that adding an element to the set cannot make the overall influence decrease, which aligns with the intuitive expectation that more influencers lead to more influence. 
+
 
 
 ### Algorithm: Greedy Hill-Climbing
@@ -64,12 +68,16 @@ In the context of the influence maximization problem, we employ greedy hill-clim
 
 This approach achieves an approximation ratio of 63% but performs fairly slow and not salable. 
 
-```{r, echo=FALSE, fig.cap="Hill Climbing Algorithm", out.width = '80%', fig.align = 'center'}
+```{r, echo=FALSE, fig.cap="Hill Climbing Algorithm. Created by Mahyavanshi, B.", out.width = '80%', fig.align = 'center'}
 knitr::include_graphics("image/local_max.png")
 ```
 
 
+## References {.appendix}
+- Chen, W., Yuan, Y., & Zhang, L. (2010). Scalable Influence Maximization in Social Networks under the Linear Threshold Model. 2010 IEEE International Conference on Data Mining, 88-97.
 
+- Kempe, D., Kleinberg, J.M., & Tardos, É. (2003). Maximizing the spread of influence through a social network. Theory Comput., 11, 105-147.
 
+- Mahyavanshi, B. (2019, September 8). Introduction to hill climbing: Artificial intelligence. Medium. https://medium.com/@bhavek.mahyavanshi50/introduction-to-hill-climbing-artificial-intelligence-a3714ed2d8d8 
 
 
