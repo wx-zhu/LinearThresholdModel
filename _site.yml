@@ -3,7 +3,6 @@ title: "Linear Threshold Models"
 theme: "theme.css"
 description: |
   Linear Threshold Models
-output_dir: "_site"
 author: Wenxuan Zhu
 navbar:
   right:
