@@ -90,27 +90,27 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>Linear Threshold Models: Results</title>
 
-  <meta property="description" itemprop="description" content="Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click &quot;Show Code&quot; to see the implementation details. 🌟"/>
+  <meta property="description" itemprop="description" content="Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click &quot;Show Code&quot; to see the implementation details."/>
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Linear Threshold Models: Results"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click &quot;Show Code&quot; to see the implementation details. 🌟"/>
+  <meta property="og:description" content="Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click &quot;Show Code&quot; to see the implementation details."/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Linear Threshold Models"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Linear Threshold Models: Results"/>
-  <meta property="twitter:description" content="Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click &quot;Show Code&quot; to see the implementation details. 🌟"/>
+  <meta property="twitter:description" content="Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click &quot;Show Code&quot; to see the implementation details."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","code_folding"]}},"value":[{"type":"character","attributes":{},"value":["Results"]},{"type":"character","attributes":{},"value":["Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click \"Show Code\" to see the implementation details. 🌟\n"]},{"type":"logical","attributes":{},"value":[true]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","code_folding"]}},"value":[{"type":"character","attributes":{},"value":["Results"]},{"type":"character","attributes":{},"value":["Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click \"Show Code\" to see the implementation details. \n"]},{"type":"logical","attributes":{},"value":[true]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2418,7 +2418,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Results","description":"Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click \"Show Code\" to see the implementation details. 🌟","authors":[]}
+{"title":"Results","description":"Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click \"Show Code\" to see the implementation details.","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2458,7 +2458,7 @@ Algorithm
 <h1>Results</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click “Show Code” to see the implementation details. 🌟</p></p>
+<p><p>Explore various functions of the Linear Threshold Model (LTM) and interactive Shiny apps for simulations! Click “Show Code” to see the implementation details.</p></p>
 </div>
 
 
@@ -2486,11 +2486,11 @@ Show code
 <span>  <span class='co'># Initialize empty list to store edge weights</span></span>
 <span>  <span class='va'>Ew</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span>  <span class='co'># Loop over edges in the graph</span></span>
-<span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>e</span> <span class='kw'>in</span> <span class='fu'>E</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>e</span> <span class='kw'>in</span> <span class='fu'><a href='https://r.igraph.org/reference/E.html'>E</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>    <span class='co'># Get the target node of the edge</span></span>
-<span>    <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'>ends</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span>    <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/ends.html'>ends</a></span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
 <span>    <span class='co'># Calculate the degree of the target node</span></span>
-<span>    <span class='va'>dv</span> <span class='op'>&lt;-</span> <span class='fu'>degree</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>v</span>, mode <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span></span>
+<span>    <span class='va'>dv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/degree.html'>degree</a></span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>v</span>, mode <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span></span>
 <span>    <span class='co'># Assign weight to the edge</span></span>
 <span>    <span class='va'>Ew</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>1</span> <span class='op'>/</span> <span class='va'>dv</span></span>
 <span>  <span class='op'>}</span></span>
@@ -2503,8 +2503,8 @@ Show code
 <span><span class='va'>randomWeights</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>  <span class='va'>Ew</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># Initialize empty list to store edge weights</span></span>
 <span>  <span class='co'># Assign random weights to edges</span></span>
-<span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>v</span> <span class='kw'>in</span> <span class='fu'>V</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>    <span class='va'>in_edges</span> <span class='op'>&lt;-</span> <span class='fu'>incident</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>v</span>, mode <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span>  <span class='co'># Get incoming edges for the current node</span></span>
+<span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>v</span> <span class='kw'>in</span> <span class='fu'><a href='https://r.igraph.org/reference/V.html'>V</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='va'>in_edges</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/incident.html'>incident</a></span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>v</span>, mode <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span>  <span class='co'># Get incoming edges for the current node</span></span>
 <span>    <span class='va'>ew</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>in_edges</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Generate random weights for incoming edges</span></span>
 <span>    <span class='va'>total_weight</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>ew</span><span class='op'>)</span>  <span class='co'># Calculate the total weight of incoming edges</span></span>
 <span>    <span class='co'># Normalize weights so that they sum to 1 for each node</span></span>
@@ -2531,19 +2531,19 @@ Show code
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Function to run linear threshold model</span></span>
 <span><span class='va'>runLT</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>S</span>, <span class='va'>Ew</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>  <span class='cn'>T</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>S</span><span class='op'>)</span>  <span class='co'># Targeted set with unique nodes</span></span>
-<span>  <span class='va'>lv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'>V</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>u</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Threshold for nodes</span></span>
-<span>  <span class='va'>W</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fu'>vcount</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Weighted number of activated in-neighbors</span></span>
+<span>  <span class='va'>lv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='https://r.igraph.org/reference/V.html'>V</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>u</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Threshold for nodes</span></span>
+<span>  <span class='va'>W</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Weighted number of activated in-neighbors</span></span>
 <span>  <span class='va'>Sj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>S</span><span class='op'>)</span></span>
 <span>  </span>
 <span>  <span class='kw'>while</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>Sj</span><span class='op'>)</span> <span class='op'>&gt;</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>    <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='cn'>T</span><span class='op'>)</span> <span class='op'>&gt;=</span> <span class='fu'>vcount</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='cn'>T</span><span class='op'>)</span> <span class='op'>&gt;=</span> <span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>      <span class='kw'>break</span>  <span class='co'># Break if the number of active nodes exceeds or equals the total number of nodes in G</span></span>
 <span>    <span class='op'>}</span></span>
 <span>    <span class='va'>Snew</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span>    <span class='kw'>for</span> <span class='op'>(</span><span class='va'>u</span> <span class='kw'>in</span> <span class='va'>Sj</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>      <span class='va'>neighbors</span> <span class='op'>&lt;-</span> <span class='fu'>neighbors</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>u</span>, mode <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span></span>
+<span>      <span class='va'>neighbors</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/neighbors.html'>neighbors</a></span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>u</span>, mode <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span></span>
 <span>      <span class='kw'>for</span> <span class='op'>(</span><span class='va'>v</span> <span class='kw'>in</span> <span class='va'>neighbors</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>        <span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'>get.edge.ids</span><span class='op'>(</span><span class='va'>G</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>v</span>, <span class='va'>u</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Define 'e' as the edge index</span></span>
+<span>        <span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://r.igraph.org/reference/get.edge.ids.html'>get.edge.ids</a></span><span class='op'>(</span><span class='va'>G</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>v</span>, <span class='va'>u</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># Define 'e' as the edge index</span></span>
 <span>        <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>v</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>          <span class='co'># Calculate the total weight of the activated in-neighbors</span></span>
 <span>          <span class='va'>total_weight</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>Ew</span><span class='op'>[[</span><span class='va'>e</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span></span>
@@ -2588,8 +2588,8 @@ Show code
 <span>    <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>total_active</span>  <span class='co'># Update total active nodes for current iteration</span></span>
 <span>    </span>
 <span>    <span class='co'># Limit total active nodes to the number of nodes in the graph</span></span>
-<span>    <span class='kw'>if</span> <span class='op'>(</span><span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&gt;=</span> <span class='fu'>vcount</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>      <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'>vcount</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>  </span>
+<span>    <span class='kw'>if</span> <span class='op'>(</span><span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&gt;=</span> <span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>      <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>  </span>
 <span>    <span class='op'>}</span></span>
 <span>    </span>
 <span>    <span class='co'># Update data frame with current iteration's total active nodes</span></span>
@@ -2620,24 +2620,24 @@ Show code
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>## Erdős–Rényi model</span></span>
 <span><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span></span>
 <span><span class='co'># Create a random graph with 50 nodes and edge weights satisfying the constraint</span></span>
-<span><span class='va'>random_graph_50</span> <span class='op'>&lt;-</span> <span class='fu'>erdos.renyi.game</span><span class='op'>(</span><span class='fl'>50</span>, p <span class='op'>=</span> <span class='fl'>0.05</span>, directed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='co'># random graph set up</span></span>
+<span><span class='va'>random_graph_50</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/erdos.renyi.game.html'>erdos.renyi.game</a></span><span class='op'>(</span><span class='fl'>50</span>, p <span class='op'>=</span> <span class='fl'>0.05</span>, directed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='co'># random graph set up</span></span>
 <span></span>
 <span><span class='co'># Equal edge weight for node v -&gt; Calculate uniform edge weights</span></span>
 <span><span class='va'>Ew_uniform</span> <span class='op'>&lt;-</span> <span class='fu'>uniformWeights</span><span class='op'>(</span><span class='va'>random_graph_50</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'># Scale edge width based on the weights in Ew_uniform</span></span>
-<span><span class='va'>edge_width</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'>E</span><span class='op'>(</span><span class='va'>random_graph_50</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>  <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'>ends</span><span class='op'>(</span><span class='va'>random_graph_50</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span><span class='va'>edge_width</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='https://r.igraph.org/reference/E.html'>E</a></span><span class='op'>(</span><span class='va'>random_graph_50</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/ends.html'>ends</a></span><span class='op'>(</span><span class='va'>random_graph_50</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
 <span>  <span class='va'>Ew_uniform</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span></span>
 <span><span class='op'>}</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'># Map edge_width to color_palette</span></span>
-<span><span class='va'>color_palette</span> <span class='op'>&lt;-</span> <span class='fu'>wes_palette</span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>5</span>, name<span class='op'>=</span><span class='st'>"Zissou1"</span><span class='op'>)</span></span>
+<span><span class='va'>color_palette</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/wesanderson/man/wes_palette.html'>wes_palette</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>5</span>, name<span class='op'>=</span><span class='st'>"Zissou1"</span><span class='op'>)</span></span>
 <span><span class='va'>edge_color</span> <span class='op'>&lt;-</span> <span class='va'>color_palette</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>edge_width</span>, breaks <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>]</span></span>
 <span></span>
 <span><span class='co'># Plot the graph with gradient edge color</span></span>
 <span><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mar<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>.1</span><span class='op'>)</span></span>
-<span><span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'>plot.igraph</span><span class='op'>(</span><span class='va'>random_graph_50</span>, </span>
+<span><span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/plot.igraph.html'>plot.igraph</a></span><span class='op'>(</span><span class='va'>random_graph_50</span>, </span>
 <span>            edge.width <span class='op'>=</span> <span class='va'>edge_width</span>, </span>
 <span>            edge.color <span class='op'>=</span> <span class='va'>edge_color</span>,</span>
 <span>            edge.arrow.size <span class='op'>=</span> <span class='fl'>0.4</span>,</span>
@@ -2663,24 +2663,24 @@ Show code
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>## Preferential attachment model</span></span>
 <span><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span></span>
 <span><span class='co'># Create a random graph with 50 nodes and edge weights satisfying the constraint</span></span>
-<span><span class='va'>random_graph_50</span> <span class='op'>&lt;-</span> <span class='fu'>sample_pa</span><span class='op'>(</span><span class='fl'>50</span>, power <span class='op'>=</span> <span class='fl'>1</span>, m <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='co'># random graph set up</span></span>
+<span><span class='va'>random_graph_50</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/sample_pa.html'>sample_pa</a></span><span class='op'>(</span><span class='fl'>50</span>, power <span class='op'>=</span> <span class='fl'>1</span>, m <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='co'># random graph set up</span></span>
 <span></span>
 <span><span class='co'># Equal edge weight for node v -&gt; Calculate uniform edge weights</span></span>
 <span><span class='va'>Ew_uniform</span> <span class='op'>&lt;-</span> <span class='fu'>uniformWeights</span><span class='op'>(</span><span class='va'>random_graph_50</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'># Scale edge width based on the weights in Ew_uniform</span></span>
-<span><span class='va'>edge_width</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'>E</span><span class='op'>(</span><span class='va'>random_graph_50</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>  <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'>ends</span><span class='op'>(</span><span class='va'>random_graph_50</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span><span class='va'>edge_width</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='https://r.igraph.org/reference/E.html'>E</a></span><span class='op'>(</span><span class='va'>random_graph_50</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/ends.html'>ends</a></span><span class='op'>(</span><span class='va'>random_graph_50</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
 <span>  <span class='va'>Ew_uniform</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span></span>
 <span><span class='op'>}</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'># Map edge_width to color_palette</span></span>
-<span><span class='va'>color_palette</span> <span class='op'>&lt;-</span> <span class='fu'>wes_palette</span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>5</span>, name<span class='op'>=</span><span class='st'>"Zissou1"</span><span class='op'>)</span></span>
+<span><span class='va'>color_palette</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/wesanderson/man/wes_palette.html'>wes_palette</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>5</span>, name<span class='op'>=</span><span class='st'>"Zissou1"</span><span class='op'>)</span></span>
 <span><span class='va'>edge_color</span> <span class='op'>&lt;-</span> <span class='va'>color_palette</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>edge_width</span>, breaks <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>]</span></span>
 <span></span>
 <span><span class='co'># Plot the graph with gradient edge color</span></span>
 <span><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mar<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>.1</span><span class='op'>)</span></span>
-<span><span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'>plot.igraph</span><span class='op'>(</span><span class='va'>random_graph_50</span>, </span>
+<span><span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/plot.igraph.html'>plot.igraph</a></span><span class='op'>(</span><span class='va'>random_graph_50</span>, </span>
 <span>            edge.width <span class='op'>=</span> <span class='va'>edge_width</span>, </span>
 <span>            edge.color <span class='op'>=</span> <span class='va'>edge_color</span>,</span>
 <span>            edge.arrow.size <span class='op'>=</span> <span class='fl'>0.4</span>,</span>
@@ -2725,10 +2725,10 @@ Show code
 <span>  <span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># Initialize the seed set</span></span>
 <span>  </span>
 <span>  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>k</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>    <span class='va'>inf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>nodes <span class='op'>=</span> <span class='fu'>V</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>, influence <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>  <span class='co'># Initialize the influence table</span></span>
+<span>    <span class='va'>inf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>nodes <span class='op'>=</span> <span class='fu'><a href='https://r.igraph.org/reference/V.html'>V</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>, influence <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>  <span class='co'># Initialize the influence table</span></span>
 <span>    </span>
 <span>    <span class='co'># Calculate the influence for nodes not in S</span></span>
-<span>    <span class='kw'>for</span> <span class='op'>(</span><span class='va'>v</span> <span class='kw'>in</span> <span class='fu'>V</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>    <span class='kw'>for</span> <span class='op'>(</span><span class='va'>v</span> <span class='kw'>in</span> <span class='fu'><a href='https://r.igraph.org/reference/V.html'>V</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>      <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>v</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>S</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>        <span class='va'>inf</span><span class='op'>$</span><span class='va'>influence</span><span class='op'>[</span><span class='va'>v</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'>avgLT</span><span class='op'>(</span><span class='va'>G</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>S</span>, <span class='va'>v</span><span class='op'>)</span>, <span class='va'>Ew</span>, iterations <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
 <span>      <span class='op'>}</span></span>
@@ -2781,8 +2781,8 @@ Show code
 <span>    <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>total_active</span>  <span class='co'># Update total active nodes for current iteration</span></span>
 <span>    </span>
 <span>    <span class='co'># Limit total active nodes to the number of nodes in the graph</span></span>
-<span>    <span class='kw'>if</span> <span class='op'>(</span><span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&gt;=</span> <span class='fu'>vcount</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>      <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'>vcount</span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>  </span>
+<span>    <span class='kw'>if</span> <span class='op'>(</span><span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&gt;=</span> <span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>      <span class='va'>total_active_nodes</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>G</span><span class='op'>)</span>  </span>
 <span>    <span class='op'>}</span></span>
 <span>    </span>
 <span>    <span class='co'># Update data frame with current iteration's total active nodes</span></span>
@@ -2801,7 +2801,7 @@ Show code
 <span></span>
 <span></span>
 <span><span class='co'># Example usage</span></span>
-<span><span class='va'>random_graph</span> <span class='op'>&lt;-</span> <span class='fu'>erdos.renyi.game</span><span class='op'>(</span><span class='fl'>50</span>, <span class='fl'>0.1</span>, directed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span><span class='va'>random_graph</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/erdos.renyi.game.html'>erdos.renyi.game</a></span><span class='op'>(</span><span class='fl'>50</span>, <span class='fl'>0.1</span>, directed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span><span class='co'># Calculate uniform edge weights</span></span>
 <span><span class='va'>Ew_uniform</span> <span class='op'>&lt;-</span> <span class='fu'>uniformWeights</span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span></span>
 <span></span>
@@ -2812,7 +2812,7 @@ Show code
 <pre><code>Selected node: 2 with influence: 37 
 Selected node: 22 with influence: 38 
 Selected node: 32 with influence: 40 
-[1] &quot;Total time: 0.191519975662231&quot;</code></pre>
+[1] &quot;Total time: 0.208096981048584&quot;</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
@@ -2823,12 +2823,12 @@ Show code
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>active_df_selectedSeed</span> <span class='op'>&lt;-</span> <span class='fu'>activeNodes_list</span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>seed_set</span>, <span class='va'>Ew_uniform</span>, iterations <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'># Scale edge width based on the weights in Ew_uniform</span></span>
-<span><span class='va'>edge_width</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'>E</span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span>  <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'>ends</span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span><span class='va'>edge_width</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='https://r.igraph.org/reference/E.html'>E</a></span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span>  <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/ends.html'>ends</a></span><span class='op'>(</span><span class='va'>random_graph</span>, <span class='va'>e</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
 <span>  <span class='va'>Ew_uniform</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span></span>
 <span><span class='op'>}</span><span class='op'>)</span></span>
 <span><span class='co'># Map edge_width to color_palette</span></span>
-<span><span class='va'>color_palette</span> <span class='op'>&lt;-</span> <span class='fu'>wes_palette</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span>, name <span class='op'>=</span> <span class='st'>"Zissou1"</span><span class='op'>)</span></span>
+<span><span class='va'>color_palette</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/wesanderson/man/wes_palette.html'>wes_palette</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span>, name <span class='op'>=</span> <span class='st'>"Zissou1"</span><span class='op'>)</span></span>
 <span><span class='va'>edge_color</span> <span class='op'>&lt;-</span> <span class='va'>color_palette</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>edge_width</span>, breaks <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>]</span></span>
 <span></span>
 <span></span>
@@ -2836,12 +2836,12 @@ Show code
 <span><span class='va'>T_list_with_seed</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>seed_set</span><span class='op'>)</span>, <span class='va'>active_df_selectedSeed</span><span class='op'>[[</span><span class='st'>"T_list"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'># Create the GIF</span></span>
-<span><span class='fu'>saveGIF</span><span class='op'>(</span></span>
+<span><span class='fu'><a href='https://rdrr.io/pkg/animation/man/saveGIF.html'>saveGIF</a></span><span class='op'>(</span></span>
 <span>  expr <span class='op'>=</span> <span class='op'>{</span></span>
 <span>    <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='va'>T_list_with_seed</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>      <span class='cn'>T</span> <span class='op'>&lt;-</span> <span class='va'>T_list_with_seed</span><span class='op'>[[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>]</span></span>
 <span>      <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mar<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>6</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>.1</span><span class='op'>)</span></span>
-<span>      <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot.igraph</span><span class='op'>(</span></span>
+<span>      <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r.igraph.org/reference/plot.igraph.html'>plot.igraph</a></span><span class='op'>(</span></span>
 <span>        <span class='va'>random_graph</span>,</span>
 <span>        edge.width <span class='op'>=</span> <span class='va'>edge_width</span>,</span>
 <span>        edge.color <span class='op'>=</span> <span class='va'>edge_color</span>,</span>
@@ -2849,7 +2849,7 @@ Show code
 <span>        layout <span class='op'>=</span> <span class='va'>layout.circle</span>,</span>
 <span>        <span class='co'># vertex.label = NA,</span></span>
 <span>        vertex.size <span class='op'>=</span> <span class='fl'>10</span>,</span>
-<span>        vertex.color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'>vcount</span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='cn'>T</span>, <span class='st'>"#FC888F"</span>, <span class='st'>"#A9AABC"</span><span class='op'>)</span></span>
+<span>        vertex.color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://r.igraph.org/reference/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>random_graph</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='cn'>T</span>, <span class='st'>"#FC888F"</span>, <span class='st'>"#A9AABC"</span><span class='op'>)</span></span>
 <span>      <span class='op'>)</span></span>
 <span>      <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span><span class='op'>(</span><span class='va'>p</span>, <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>i</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='st'>"Initial Seed Set"</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"In Step"</span>, <span class='va'>i</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
 <span>    <span class='op'>}</span></span>
