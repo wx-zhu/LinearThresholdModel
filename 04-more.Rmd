@@ -47,16 +47,6 @@ Moreover, the DeGroot learning model uses **continuous** opinion values from 0 t
 > DeGroot, M. H. (1974). Reaching a Consensus. Journal of the American Statistical Association, 69(345), 118–121. https://doi.org/10.2307/2285509
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+\
+\
 

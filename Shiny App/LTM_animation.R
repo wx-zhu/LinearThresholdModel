@@ -126,6 +126,7 @@ activeNodes_list <- function(G, S, Ew, iterations) {
   
   for (i in 1:iterations) {
     T <- runLT(G, S, Ew)
+    # cat("--", i,"T:  ", T, "\n")
     total_active <- length(unique(T))  # Calculate the total active nodes in this iteration
     total_active_nodes[i] <- total_active  # Update total active nodes for current iteration
     
@@ -148,6 +149,7 @@ activeNodes_list <- function(G, S, Ew, iterations) {
   return(list(active_df = active_df, T_list = T_list))
 }
 
+
 # Function to calculate average size of activated nodes
 avgLT <- function(G, S, Ew, iterations = 1) {
   avgSize <- 0
@@ -159,7 +161,7 @@ avgLT <- function(G, S, Ew, iterations = 1) {
 }
 
 
-# Define the Greedy_LTM function
+# Greedy_LTM function to select k initial active nodes that maximize the local influence
 Greedy_LTM <- function(G, Ew, k, iterations) {
   start <- Sys.time()  # Record the start time
   S <- c()  # Initialize the seed set
@@ -235,7 +237,9 @@ ui <- fluidPage(
 
 # Server
 server <- function(input, output) {
-
+  
+  active_df_selectedSeed <- reactiveVal(NULL)  # Define reactive variable
+  
   observeEvent(input$run_simulation, {
     # Generate random graph based on user inputs
     if (input$graph_model == "erdos_renyi") {
@@ -247,23 +251,34 @@ server <- function(input, output) {
     # Calculate edge weights
     if (input$edge_weights == "uniform") {
       Ew <- uniformWeights(random_graph)
+      # Scale edge width based on the weights
+      edge_width <- sapply(E(random_graph), function(e) {
+        v <- ends(random_graph, e)[2]
+        Ew[[as.character(e)]]
+      })
     } else {
       Ew <- randomWeights(random_graph)
+      # Scale edge width based on the weights
+      edge_width <- sapply(E(random_graph), function(e) {
+        v <- ends(random_graph, e)[2]
+        Ew[[as.character(e)]]
+      })
     }
+    
+    # Map edge_width to color_palette
+    color_palette <- wes_palette(n=5, name="Zissou1")
+    edge_color <- color_palette[cut(edge_width, breaks = 5)]
     
     # Run Greedy LTM function
     seed_set <- Greedy_LTM(random_graph, Ew, k = input$seed_nodes, iterations = input$iterations)
     
     # Generate animation plot
-    active_df_selectedSeed <- activeNodes_list(random_graph, seed_set, Ew, iterations = input$iterations)
-    T_list_with_seed <- c(list(seed_set), active_df_selectedSeed[["T_list"]])
-    
-    # Initialize the plot
-    par(mar = c(6, 0, 0, 0) + .1)
+    active_df_selectedSeed(activeNodes_list(random_graph, seed_set, Ew, iterations = input$iterations))
     
     # Loop through each iteration to create the plot and save it as GIF frames
-    for (i in seq_along(T_list_with_seed)) {
-      T <- T_list_with_seed[[i]]
+    for (i in seq_along(active_df_selectedSeed()$T_list)) {
+      T <- active_df_selectedSeed()$T_list[[i]]
+      par(mar = c(6, 0, 0, 0) + .1)
       p <- plot.igraph(
         random_graph,
         edge.width = edge_width,
@@ -281,8 +296,8 @@ server <- function(input, output) {
     
     # Save the generated frames as a GIF
     saveGIF({
-      for (i in seq_along(T_list_with_seed)) {
-        T <- T_list_with_seed[[i]]
+      for (i in seq_along(active_df_selectedSeed()$T_list)) {
+        T <- active_df_selectedSeed()$T_list[[i]]
         p <- plot.igraph(
           random_graph,
           edge.width = edge_width,
@@ -299,16 +314,18 @@ server <- function(input, output) {
     }, movie.name = "LTM_animation_greedy.gif", clean = TRUE, fps = 4, fig.height = 400, fig.width = 600)
   })
   
+  # Move the GIF file into the www folder
+  file.copy("LTM_animation_greedy.gif", "www/LTM_animation_greedy.gif")
+  
   # Output the generated GIF animation
   output$active_nodes_animation <- renderImage({
     list(src = "LTM_animation_greedy.gif",
          contentType = "image/gif")
   }, deleteFile = FALSE)
   
-  
   # Output the table with the total number of active nodes at each iteration
   output$active_nodes_table <- renderDataTable({
-    active_df_selectedSeed$active_df
+    active_df_selectedSeed()$active_df
   }, rownames = FALSE, class = "hover")
   
 }
