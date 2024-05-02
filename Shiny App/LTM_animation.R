@@ -311,11 +311,11 @@ server <- function(input, output) {
         title(p, ifelse(i == 1, "Initial Seed Set", paste("In Step", i - 1)))
         print(p)  # Print the plot to display it
       }
-    }, movie.name = "LTM_animation_greedy.gif", clean = TRUE, fps = 4, fig.height = 400, fig.width = 600)
+    }, movie.name = "www/LTM_animation_greedy.gif", clean = TRUE, fps = 4, fig.height = 400, fig.width = 600)
   })
   
-  # Move the GIF file into the www folder
-  file.copy("LTM_animation_greedy.gif", "www/LTM_animation_greedy.gif")
+  # # Move the GIF file into the www folder
+  # file.copy("LTM_animation_greedy.gif", "www/LTM_animation_greedy.gif")
   
   # Output the generated GIF animation
   output$active_nodes_animation <- renderImage({
